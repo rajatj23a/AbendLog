@@ -1,0 +1,695 @@
+﻿@model AbendLog.BusinessAccess.Model.AbendLogData
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAbend.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+
+        $("#divLoading").hide();
+        //$(".date-picker").datepicker().datepicker("setDate", new Date());
+
+        $("#btnLeadServiceSubmit").click(function () {
+
+            var errorMsg = '';
+            if ($("#IncidentNumber").val().trim() == '') {
+                errorMsg = "Please enter the Incident Number\n";
+            }
+            if ($("#Region").val().trim() == '') {
+                errorMsg += "Please enter the Region\n"
+            }
+            if ($("#Team").val().trim() == '') {
+                errorMsg += "Please enter the Team\n"
+            }
+            if ($("#ProgramName").val().trim() == '') {
+                errorMsg += "Please enter the Program Name\n"
+            }
+            if ($("#AbendCode").val().trim() == '') {
+                errorMsg += "Please enter the Abend Code\n"
+            }
+            if ($("#AbendDescription").val().trim() == '') {
+                errorMsg += "Please enter the Abend Description\n"
+            }
+            if ($("#OnCallAssociate").val().trim() == '') {
+                errorMsg += "Please enter the OnCall Associate\n"
+            }
+            if ($("#RCA").val().trim() == '') {
+                errorMsg += "Please enter the RCA\n"
+            }
+            debugger
+            if ($("#Classification").val().trim() == '') {
+                errorMsg += "Please enter the Classification\n"
+            }
+            if ($("#SubClassification").val().trim() == '') {
+                errorMsg += "Please enter the Sub-Classification\n"
+            }
+            if ($("#Solution").val().trim() == '') {
+                errorMsg += "Please enter the Solution\n"
+            }
+            if ($("#CallFromEnsono").val().trim() == '') {
+                errorMsg += "Please enter the Call FromEnsono\n"
+            }
+
+            if ($("#LevelTimeForEscalation").val().trim() == '') {
+                errorMsg += "Please enter the Level Time For Escalation\n"
+            }
+            if ($("#Comments").val().trim() == '') {
+                errorMsg += "Please enter the Comments\n"
+            }
+            if ($("#AbendDate").val().trim() == '') {
+                errorMsg += "Please enter the Abend Date\n"
+            }
+            if ($("#AbendTime").val().trim() == '') {
+                errorMsg += "Please enter the Abend Time\n"
+            }
+            if ($("#RestartTime").val().trim() == '') {
+                errorMsg += "Please enter the Restart Time\n"
+            }
+            if ($("#TimeSpend").val().trim() == '') {
+                errorMsg += "Please enter the Time Spend\n"
+            }
+
+            if ($("#ResolvedBy").val().trim() == '') {
+                errorMsg += "Please enter the Resolved By\n"
+            }
+            if ($("#ResolvedDate").val().trim() == '') {
+                errorMsg += "Please enter the Resolved Date\n"
+            }
+
+            if ($("#EscalatedDate").val().trim() == '') {
+                errorMsg += "Please enter the Escalated Date\n";
+            }
+
+            //====================================================//
+
+
+
+
+
+            if ($("#EscalatedDate").val().trim() == '') {
+                $("#EscalatedDate").focus();
+            }
+
+            if ($("#ResolvedDate").val().trim() == '') {
+                $("#ResolvedDate").focus();
+            }
+            if ($("#ResolvedBy").val().trim() == '') {
+                $("#ResolvedBy").focus();
+            }
+
+            if ($("#TimeSpend").val().trim() == '') {
+                $("#TimeSpend").focus();
+            }
+            if ($("#RestartTime").val().trim() == '') {
+                $("#RestartTime").focus();
+            }
+            if ($("#AbendTime").val().trim() == '') {
+                $("#AbendTime").focus();
+            }
+            if ($("#AbendDate").val().trim() == '') {
+                $("#AbendDate").focus();
+            }
+
+
+            if ($("#Comments").val().trim() == '') {
+                $("#Comments").focus();
+            }
+            if ($("#LevelTimeForEscalation").val().trim() == '') {
+                $("#LevelTimeForEscalation").focus();
+            }
+
+            if ($("#CallFromEnsono").val().trim() == '') {
+                $("#CallFromEnsono").focus();
+            }
+            if ($("#Solution").val().trim() == '') {
+                $("#Solution").focus();
+            }
+            if ($("#SubClassification").val().trim() == '') {
+                $("#SubClassification").focus();
+            }
+            if ($("#Classification").val().trim() == '') {
+                $("#Classification").focus();
+            }
+            if ($("#RCA").val().trim() == '') {
+                $("#RCA").focus();
+            }
+            if ($("#OnCallAssociate").val().trim() == '') {
+                $("#OnCallAssociate").focus();
+            }
+            if ($("#AbendDescription").val().trim() == '') {
+                $("#AbendDescription").focus();
+            }
+            if ($("#AbendCode").val().trim() == '') {
+                $("#AbendCode").focus();
+            }
+            if ($("#ProgramName").val().trim() == '') {
+                $("#ProgramName").focus();
+            }
+
+            if ($("#Team").val().trim() == '') {
+                $("#Team").focus();
+            }
+            if ($("#Region").val().trim() == '') {
+                $("#Region").focus();
+            }
+            if ($("#IncidentNumber").val().trim() == '') {
+                $("#IncidentNumber").focus();
+            }
+            if (errorMsg != '') {
+                alert(errorMsg);
+                return false;
+            }
+            else {
+                return true;
+            }
+        });
+    });
+
+</script>
+<br />
+@using (Html.BeginForm("Create", "AbendLog", FormMethod.Post, new { @id = "createAbendLog" }))
+{
+    @Html.HiddenFor(m => m.ID);
+    @Html.AntiForgeryToken()
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Create Abend</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Incident Number<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.IncidentNumber, null, new { @class = "form-control", @maxlength = "255", @placeholder = "Enter Incident Number here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Region<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <select class="form-control" id="Region" name="region" style="width:115px">
+                            <option value="Model">Model</option>
+                            <option value="Production">Production</option>
+                            <option value="Month End">Month End</option>
+                        </select>
+                        <label for="service">Team<font color="red">*</font></label>
+                        <select class="form-control" id="Team" name="Team" style="width:115px">
+                            <option value="PMS">PMS</option>
+                            <option value="Exceed">Exceed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Job Name<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <select class="form-control" name="jobname" style="width:280px" id="jobname">
+                            <option value="CARNT21W">CARNT21W</option>
+                            <option value="CAVZP00W">CAVZP00W</option>
+                            <option value="CAONC01W">CAONC01W</option>
+                            <option value="C2VDD29D">C2VDD29D</option>
+                            <option value="CARNT02D">CARNT02D</option>
+                            <option value="CAVDDC1D">CAVDDC1D</option>
+                            <option value="CAVDDA1D">CAVDDA1D</option>
+                            <option value="C2SI250R">C2SI250R</option>
+                            <option value="CABIL01W">CABIL01W</option>
+                            <option value="CAPDW40W">CAPDW40W</option>
+                            <option value="CAOPN99D">CAOPN99D</option>
+                            <option value="CALIF10D">CALIF10D</option>
+                            <option value="C2VLI97D">C2VLI97D</option>
+                            <option value="C2VLI98D">C2VLI98D</option>
+                            <option value="CAACD30D">CAACD30D</option>
+                            <option value="C2VDW01W">C2VDW01W</option>
+                            <option value="CALFE27R">CALFE27R</option>
+                            <option value="C2VDD12D">C2VDD12D</option>
+                            <option value="C2VDD00D">C2VDD00D</option>
+                            <option value="C2VID01D">C2VID01D</option>
+                            <option value="C2VDDOPN">C2VDDOPN</option>
+                            <option value="C2VOPN1D">C2VOPN1D</option>
+                            <option value="CAPIFADD">CAPIFADD</option>
+                            <option value="CALFE97R">CALFE97R</option>
+                            <option value="C2VDDC1D">C2VDDC1D</option>
+                            <option value="CAVDD45D">CAVDD45D</option>
+                            <option value="CAPQICRM">CAPQICRM</option>
+                            <option value="C2VDDA1D">C2VDDA1D</option>
+                            <option value="C2RNT21W">C2RNT21W</option>
+                            <option value="CAPMK33M">CAPMK33M</option>
+                            <option value="CAPMK3EY">CAPMK3EY</option>
+                            <option value="CAPMEC7M">CAPMEC7M</option>
+                            <option value="CAPMKA4Q">CAPMKA4Q</option>
+                            <option value="CAPMK19Q">CAPMK19Q</option>
+                            <option value="CAPMK02Y">CAPMK02Y</option>
+                            <option value="CAPMKC3Y">CAPMKC3Y</option>
+                            <option value="CAPMKD3Y">CAPMKD3Y</option>
+                            <option value="CAPMKE3Y">CAPMKE3Y</option>
+                            <option value="CAPMKB6Y">CAPMKB6Y</option>
+                            <option value="CAPMKC6Y">CAPMKC6Y</option>
+                            <option value="CAPMKD7Y">CAPMKD7Y</option>
+                            <option value="CAPME08M">CAPME08M</option>
+                            <option value="CAPMF35M">CAPMF35M</option>
+                            <option value="CAPME35M">CAPME35M</option>
+                            <option value="CAPMK3JY">CAPMK3JY</option>
+                            <option value="CAPMKE7Y">CAPMKE7Y</option>
+                            <option value="CATAXWRY">CATAXWRY</option>
+                            <option value="C2RNT15W">C2RNT15W</option>
+                            <option value="CARNT15W">CARNT15W</option>
+                            <option value="CAVDDADD">CAVDDADD</option>
+                            <option value="C2VDD02D">C2VDD02D</option>
+                            <option value="CAPOL01R">CAPOL01R</option>
+                            <option value="C2LFE47R">C2LFE47R</option>
+                            <option value="CAVID01D">CAVID01D</option>
+                            <option value="CAGI250R">CAGI250R</option>
+                            <option value="CABILGTW">CABILGTW</option>
+                            <option value="CABILGTU">CABILGTU</option>
+                            <option value="C2PIFADD">C2PIFADD</option>
+                            <option value="C2ESR09W">C2ESR09W</option>
+                            <option value="CAGEI10D">CAGEI10D</option>
+                            <option value="C2RNT02D">C2RNT02D</option>
+                            <option value="C2VCXRID">C2VCXRID</option>
+                            <option value="CAPDW03D">CAPDW03D</option>
+                            <option value="CABILGTD">CABILGTD</option>
+                            <option value="CAVDD46D">CAVDD46D</option>
+                            <option value="CAVDW04W">CAVDW04W</option>
+                            <option value="C2LIS22R">C2LIS22R</option>
+                            <option value="CAVDDE1D">CAVDDE1D</option>
+                            <option value="CAVCC01W">CAVCC01W</option>
+                            <option value="C2ECP09W">C2ECP09W</option>
+                            <option value="CAGI300D">CAGI300D</option>
+                            <option value="CAPBS03R">CAPBS03R</option>
+                            <option value="CAVDD02D">CAVDD02D</option>
+                            <option value="GI300020">GI300020</option>
+                            <option value="C2STPEXD">C2STPEXD</option>
+                            <option value="C2VDDB1D">C2VDDB1D</option>
+                            <option value="CARTPF2R">CARTPF2R</option>
+                            <option value="CAPDW00D">CAPDW00D</option>
+                            <option value="CASG02LD">CASG02LD</option>
+                            <option value="CAVAD01D">CAVAD01D</option>
+                            <option value="CAPDW04D">CAPDW04D</option>
+                            <option value="CACLDT5D">CACLDT5D</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Step Name<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <select class="form-control" name="stepname" style="width:280px" id="stepname">
+                            <option value="STEP020">STEP020</option>
+                            <option value="VZP00030">VZP00030</option>
+                            <option value="ONC01010">ONC01010</option>
+                            <option value="SMTPBTCH">SMTPBTCH</option>
+                            <option value="RNT01040">RNT01040</option>
+                            <option value="PDDC1010">PDDC1010</option>
+                            <option value="PDD01135">PDD01135</option>
+                            <option value="GI250030">GI250030</option>
+                            <option value="WBL10100">WBL10100</option>
+                            <option value="PDD01121">PDD01121</option>
+                            <option value="PDW40025">PDW40025</option>
+                            <option value="DADSSTRT">DADSSTRT</option>
+                            <option value="LIF10020">LIF10020</option>
+                            <option value="UCCALL">UCCALL</option>
+                            <option value="STEP0010">STEP0010</option>
+                            <option value="PDW01060">PDW01060</option>
+                            <option value="LFE27060">LFE27060</option>
+                            <option value="PDD12050">PDD12050</option>
+                            <option value="PDD00140">PDD00140</option>
+                            <option value="VID01230">VID01230</option>
+                            <option value="IDCMS01">IDCMS01</option>
+                            <option value="LFE97010">LFE97010</option>
+                            <option value="PDDC1047">PDDC1047</option>
+                            <option value="PDD45015">PDD45015</option>
+                            <option value="PQICRM20">PQICRM20</option>
+                            <option value="PDD01110">PDD01110</option>
+                            <option value="RNT10070">RNT10070</option>
+                            <option value="PMK03363">PMK03363</option>
+                            <option value="NAI05900">NAI05900</option>
+                            <option value="PMEC70BJ">PMEC70BJ</option>
+                            <option value="NAI02100">NAI02100</option>
+                            <option value="NAI05800">NAI05800</option>
+                            <option value="PMEC8076">PMEC8076</option>
+                            <option value="PMEC70BN">PMEC70BN</option>
+                            <option value="PS010">PS010</option>
+                            <option value="PMEC70BL">PMEC70BL</option>
+                            <option value="PME35993">PME35993</option>
+                            <option value="NAI01510">NAI01510</option>
+                            <option value="TAXWR002">TAXWR002</option>
+                            <option value="RNT00200">RNT00200</option>
+                            <option value="DSNUTSO">DSNUTSO</option>
+                            <option value="PDD01060">PDD01060</option>
+                            <option value="PDD02030">PDD02030</option>
+                            <option value="PRTDM010">PRTDM010</option>
+                            <option value="CEX00R50">CEX00R50</option>
+                            <option value="PDD01118">PDD01118</option>
+                            <option value="GI250020">GI250020 </option>
+                            <option value="LFE42015">LFE42015</option>
+                            <option value="VID01180">VID01180</option>
+                            <option value="GI250020">GI250020</option>
+                            <option value="STEP0001">STEP0001</option>
+                            <option value="PIFMRG10">PIFMRG10</option>
+                            <option value="ESR09020">ESR09020</option>
+                            <option value="STEP0030">STEP0030</option>
+                            <option value="CAGEI010">CAGEI010</option>
+                            <option value="CXRI0020">CXRI0020</option>
+                            <option value="PDWA3010">PDWA3010</option>
+                            <option value="CABGT060">CABGT060</option>
+                            <option value="PDD55010">PDD55010</option>
+                            <option value="PDW04020">PDW04020</option>
+                            <option value="XML0010">XML0010</option>
+                            <option value="BIL10020">BIL10020</option>
+                            <option value="VID01050">VID01050</option>
+                            <option value="PDD01130">PDD01130</option>
+                            <option value="PDDE1001">PDDE1001</option>
+                            <option value="CCC01020">CCC01020</option>
+                            <option value="ECP09375">ECP09375</option>
+                            <option value="GI300020">C2ESR09W</option>
+                            <option value="STEP02">STEP02</option>
+                            <option value="STP01010">STP01010</option>
+                            <option value="VDDB1030">VDDB1030</option>
+                            <option value="CAM20030">CAM20030</option>
+                            <option value="PDWI1010">PDWI1010</option>
+                            <option value="STEP1">STEP1</option>
+                            <option value="RNT01046">RNT01046</option>
+                            <option value="VAD01020">VAD01020</option>
+                            <option value="PS020">PS020</option>
+                            <option value="VDD16150">VDD16150</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Program Name<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <select class="form-control" id="ProgramName" name="ProgramName" style="width:280px">
+                            <option value="ABW0200">ABW0200</option>
+                            <option value="CABGI600">CABGI600</option>
+                            <option value="GTAMAINT">GTAMAINT</option>
+                            <option value="STPUPD">STPUPD</option>
+                            <option value="UCCALL4">UCCALL4</option>
+                            <option value="ABD1400">ABD1400</option>
+                            <option value="D9DPEZ2D">D9DPEZ2D</option>
+                            <option value="BMCLOAD">BMCLOAD</option>
+                            <option value="WAD0500">WAD0500</option>
+                            <option value="BPXBATCH">BPXBATCH</option>
+                            <option value="CAD69DRP">CAD69DRP</option>
+                            <option value="CAV67000">CAV67000</option>
+                            <option value="IDCAMS">IDCAMS</option>
+                            <option value="CAONCALL">CAONCALL</option>
+                            <option value="SMTPBTCH">SMTPBTCH</option>
+                            <option value="REN520V1">REN520V1</option>
+                            <option value="WDD1700">WDD1700</option>
+                            <option value="ABD1350">ABD1350</option>
+                            <option value="DMGMERGE">DMGMERGE</option>
+                            <option value="ASDWBL05">ASDWBL05</option>
+                            <option value="S3RISTA">S3RISTA</option>
+                            <option value="ABW0105 ">ABW0105 </option>
+                            <option value="DADBBIS">DADBBIS</option>
+                            <option value="ABD1100">ABD1100</option>
+                            <option value="CALIF100">CALIF100</option>
+                            <option value="UCXBM25C">UCXBM25C</option>
+                            <option value="IEBASE">IEBASE</option>
+                            <option value="WDD3100">WDD3100</option>
+                            <option value="CALFE410">CALFE410</option>
+                            <option value="WDD4720">WDD4720</option>
+                            <option value="ICEGENER">ICEGENER</option>
+                            <option value="ABD2750">ABD2750</option>
+                            <option value="ABD4500">ABD4500</option>
+                            <option value="FTP">FTP</option>
+                            <option value="ASD1000">ASD1000</option>
+                            <option value="CAV67500">CAV67500</option>
+                            <option value="IH040C00">IH040C00</option>
+                            <option value="D311KA2B">D311KA2B</option>
+                            <option value="IB200CU">IB200CU</option>
+                            <option value="E407912A">E407912A</option>
+                            <option value="CAPEZ000">CAPEZ000</option>
+                            <option value="CAV67500">CAV67500</option>
+                            <option value="AB12MI06">AB12MI06</option>
+                            <option value="IKJEFT01">IKJEFT01</option>
+                            <option value="ASDPRDVR">ASDPRDVR</option>
+                            <option value="POLPVIC2">POLPVIC2</option>
+                            <option value="PDD01121">PDD01121</option>
+                            <option value="S3HOMDVR">S3HOMDVR</option>
+                            <option value="CABGI500">CABGI500</option>
+                            <option value="CALFE985">CALFE985</option>
+                            <option value="WID0700">WID0700</option>
+                            <option value="SORT">SORT</option>
+                            <option value="D9PIFMRG">D9PIFMRG</option>
+                            <option value="ABDGEI56">ABDGEI56</option>
+                            <option value="ABDCXRI1">ABDCXRI1</option>
+                            <option value="ABD4350">ABD4350</option>
+                            <option value="WDW0800">WDW0800</option>
+                            <option value="XMLPARSE">XMLPARSE</option>
+                            <option value="ASD1000">ASD1000</option>
+                            <option value="ASDWBL30">ASDWBL30</option>
+                            <option value="WID0100">WID0100</option>
+                            <option value="WDD1300">WDD1300</option>
+                            <option value="ABD2300">ABD2300</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Abend Code<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <select class="form-control" id="AbendCode" name="abendcode" style="width:280px">
+                            <option value="U0666">U0666</option>
+                            <option value="12">12</option>
+                            <option value="S0C7">S0C7</option>
+                            <option value="RC08">RC08</option>
+                            <option value="S0CB">S0CB</option>
+                            <option value="U4038">U4038</option>
+                            <option value="RC 8">RC 8</option>
+                            <option value="S806">S806</option>
+                            <option value="RC 12">RC 12</option>
+                            <option value="U4095">U4095</option>
+                            <option value="U0016">U0016</option>
+                            <option value="U2000">U2000</option>
+                            <option value="JCL error">JCL error</option>
+                            <option value="S522">S522</option>
+                            <option value="16">16</option>
+                            <option value="8">8</option>
+                            <option value="U1234">U1234</option>
+                            <option value="2">2</option>
+                            <option value="S0C4">S0C4</option>
+                            <option value="U1954">U1954</option>
+                            <option value="U0904">U0904</option>
+                            <option value="U0020">U0020</option>
+                            <option value="SOCB">SOCB</option>
+                            <option value="U0900">U0900</option>
+                            <option value="U0015">U0015</option>
+                            <option value="RC16">RC16</option>
+                            <option value="RC16">RC12</option>
+                            <option value="U2110">U2110</option>
+                            <option value="RC 0016">RC 0016</option>
+                            <option value="SB37">SB37</option>
+                            <option value="256">256</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Abend Description<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.AbendDescription, null, new { @class = "form-control", @maxlength = "10000", @placeholder = "Enter Abend Description here" })
+                    </div>
+
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Abend Date<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group input-group-sm col-md-offset col-md-4">
+                        @Html.EditorFor(m => m.AbendDate, new { @class = "form-control datepicker" })
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Abend Time<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.AbendTime, null, new { @class = "form-control", @maxlength = "255", @placeholder = "Enter Abend Time here" })
+                    </div>
+
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Restart Time<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.RestartTime, new { @class = "form-control", @maxlength = "255", @placeholder = "Enter Restart Time here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">OnCall Associate<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.OnCallAssociate, null, new { @class = "form-control", @maxlength = "255", @placeholder = "Enter OnCall Associate here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Time Spend<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.TimeSpend, null, new { @class = "form-control", @maxlength = "255", @placeholder = "Enter Time Spend here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">RCA<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group  col-md-offset col-md-4">
+                        @Html.TextAreaFor(m => m.RCA, new { @class = "form-control", @maxlength = "10000", @placeholder = "Enter RCA here", @cols = 80, @rows = 10 })
+                        @*<textarea class="form-control" cols="20" id="RCA" maxlength="10000" name="RCA" placeholder="Enter RCA here" rows="6"></textarea>*@
+                    </div>
+
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Classification<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        <select class="form-control" id="classification" name="classification" style="width:280px">
+                            <option value="Implementation">Implementation</option>
+                            <option value="Infrastructure">Infrastructure</option>
+                            <option value="Incoming Data">Incoming Data</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">SubClassification<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.SubClassification, null, new { @class = "form-control", @maxlength = "10000", @placeholder = "Enter SubClassification here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Solution<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextAreaFor(m => m.Solution, new { @class = "form-control", @maxlength = "10000", @placeholder = "Enter Solution here", @cols = 40, @rows = 5 })
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Resolved By<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.ResolvedBy, null, new { @class = "form-control", @maxlength = "255", @placeholder = "Enter Resolved By here" })
+                    </div>
+
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Call FromEnsono<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <div class="form-group col-md-offset">
+                            <div class="form-group clockpicker col-md-offset">
+                                <select class="form-control" name="CallFromEnsono" style="width:280px" id="CallFromEnsono">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Level Time For Escalation<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.LevelTimeForEscalation, null, new { @class = "form-control", @maxlength = "255", @placeholder = "Enter LevelTimeForEscalation here" })
+                    </div>
+
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Status<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <div class="form-group col-md-offset">
+                            <div class="form-group clockpicker col-md-offset">
+                                <select class="form-control" name="status" style="width:280spx" id="status">
+                                    <option value="Active">Active</option>
+                                    <option value="Closed">Closed</option>
+                                    <option value="Reopen">Reopen</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Comments<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.Comments, null, new { @class = "form-control", @maxlength = "10000", @placeholder = "Enter Comments here" })
+                    </div>
+
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">SLABreach</label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.SLABreach, null, new { @class = "form-control", @maxlength = "255", @placeholder = "Enter SLA Breach here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Resolved Date<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group input-group-sm col-md-offset col-md-4">
+                        @Html.EditorFor(m => m.ResolvedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Escalated Date<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group input-group-sm col-md-offset col-md-4">
+                        @Html.EditorFor(m => m.EscalatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Created By<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <input class="form-control" id="Createdby" maxlength="255" name="Createdby" readonly="readonly" type="text" value=@HttpContext.Current.Session["LANID"].ToString()>
+                    </div>
+
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Created Date<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group input-group-sm col-md-offset col-md-4">
+                        <div id="datepicker">
+                            @Html.TextBoxFor(m => m.CreatedDate, new { @class = "form-control", @Value = @DateTime.Now.ToShortDateString(), @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="Fix">Permanent Fix<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.CheckBox("IsChecked", new { @class = "form-group" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <br />
+
+
+        <div class="row">
+            <div style="text-align:center!important;" id="divServiceActionPanel" class="form-group col-md-offset col-md-10">
+                <input type="submit" value="Create" id="btnLeadServiceSubmit" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "List", null, new { @class = " progressIcon btn btn-primary" })
+            </div>
+        </div>
+    </div>
+
+}
+

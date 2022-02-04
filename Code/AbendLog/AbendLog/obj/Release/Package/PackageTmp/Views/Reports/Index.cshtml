@@ -1,0 +1,78 @@
+﻿@model AbendLog.Models.ReportViewModel
+@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_LayoutAbend.cshtml";
+
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divLoading").hide();
+
+        $("#btnReport").click(function () {
+
+        });
+    });
+</script>
+<br />
+@using (Html.BeginForm("ExportToExcel", "Reports", FormMethod.Post, new { @id = "reportForm", @name = "reportForm" }))
+{
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Export Report</div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="Team">Team</label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        <select class="form-control" id="Team" name="Team" style="width:115px">
+                            <option value="">All</option>
+                            <option value="PMS">PMS</option>
+                            <option value="Exceed">Exceed</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="Region">Region</label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <select class="form-control" id="Region" name="Region" style="width:115px">
+                            <option value="">All</option>
+                            <option value="Model">Model</option>
+                            <option value="Production">Production</option>
+                            <option value="Month End">Month End</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Abend Date</label>
+                    </div>
+                    <div class="form-group input-group-sm col-md-offset col-md-4">
+                        @Html.EditorFor(model => model.AbendStartDate, new { @class = "form-control", @style = "max-width:130px!important;" })
+                        <b>TO</b>
+                        @Html.EditorFor(model => model.AbendEndDate, new { @class = "form-control", @style = "max-width:130px!important;" })
+                    </div><div class="form-group col-md-offset col-md-2">
+                        <label for="Classfication">Classfication</label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <select class="form-control" id="SelectClassification" name="SelectClassification" style="width:280px">
+                            <option value="">All</option>
+                            <option value="Implementation">Implementation</option>
+                            <option value="Infrastructure">Infrastructure</option>
+                            <option value="Incoming Data">Incoming Data</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <input id="btnReport" type="submit" class="btn btn-primary" value="Export To Excel" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

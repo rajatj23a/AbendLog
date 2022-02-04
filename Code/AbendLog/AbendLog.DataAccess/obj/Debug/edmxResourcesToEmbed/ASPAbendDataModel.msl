@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ASPAbendDataModelStoreContainer" CdmEntityContainer="ASPAbendDataEntities">
+    <EntitySetMapping Name="AbendLogs">
+      <EntityTypeMapping TypeName="ASPAbendDataModel.AbendLog">
+        <MappingFragment StoreEntitySet="AbendLog">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="JobName" ColumnName="JobName" />
+          <ScalarProperty Name="StepName" ColumnName="StepName" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="AbendCode" ColumnName="AbendCode" />
+          <ScalarProperty Name="AbendDescription" ColumnName="AbendDescription" />
+          <ScalarProperty Name="AbendDate" ColumnName="AbendDate" />
+          <ScalarProperty Name="AbendTime" ColumnName="AbendTime" />
+          <ScalarProperty Name="RestartTime" ColumnName="RestartTime" />
+          <ScalarProperty Name="OnCallAssociate" ColumnName="OnCallAssociate" />
+          <ScalarProperty Name="TimeSpend" ColumnName="TimeSpend" />
+          <ScalarProperty Name="RCA" ColumnName="RCA" />
+          <ScalarProperty Name="Classification" ColumnName="Classification" />
+          <ScalarProperty Name="SubClassification" ColumnName="SubClassification" />
+          <ScalarProperty Name="Solution" ColumnName="Solution" />
+          <ScalarProperty Name="OpenedBy" ColumnName="OpenedBy" />
+          <ScalarProperty Name="ResolvedBy" ColumnName="ResolvedBy" />
+          <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+          <ScalarProperty Name="CallFromEnsono" ColumnName="CallFromEnsono" />
+          <ScalarProperty Name="Escalation" ColumnName="Escalation" />
+          <ScalarProperty Name="LevelTimeForEscalation" ColumnName="LevelTimeForEscalation" />
+          <ScalarProperty Name="EscalatedTo" ColumnName="EscalatedTo" />
+          <ScalarProperty Name="EscalatedBy" ColumnName="EscalatedBy" />
+          <ScalarProperty Name="EscalatedDate" ColumnName="EscalatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="SLABreach" ColumnName="SLABreach" />
+          <ScalarProperty Name="SLABreachComments" ColumnName="SLABreachComments" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="PermanentFix" ColumnName="PermanentFix" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PermanentFixes">
+      <EntityTypeMapping TypeName="ASPAbendDataModel.PermanentFix">
+        <MappingFragment StoreEntitySet="PermanentFix">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+          <ScalarProperty Name="RCA" ColumnName="RCA" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="ASPAbendDataModel.Report">
+        <MappingFragment StoreEntitySet="Reports">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Years" ColumnName="Years" />
+          <ScalarProperty Name="Months" ColumnName="Months" />
+          <ScalarProperty Name="GeneratedBy" ColumnName="GeneratedBy" />
+          <ScalarProperty Name="GeneratedDate" ColumnName="GeneratedDate" />
+          <ScalarProperty Name="TypeOfReport" ColumnName="TypeOfReport" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTbls">
+      <EntityTypeMapping TypeName="ASPAbendDataModel.UserTbl">
+        <MappingFragment StoreEntitySet="UserTbl">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="LANID" ColumnName="LANID" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetAbendlogData" FunctionName="ASPAbendDataModel.Store.GetAbendlogData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASPAbendDataModel.GetAbendlogData_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="JobName" ColumnName="JobName" />
+          <ScalarProperty Name="StepName" ColumnName="StepName" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="AbendCode" ColumnName="AbendCode" />
+          <ScalarProperty Name="AbendDescription" ColumnName="AbendDescription" />
+          <ScalarProperty Name="AbendDate" ColumnName="AbendDate" />
+          <ScalarProperty Name="AbendTime" ColumnName="AbendTime" />
+          <ScalarProperty Name="RestartTime" ColumnName="RestartTime" />
+          <ScalarProperty Name="OnCallAssociate" ColumnName="OnCallAssociate" />
+          <ScalarProperty Name="TimeSpend" ColumnName="TimeSpend" />
+          <ScalarProperty Name="RCA" ColumnName="RCA" />
+          <ScalarProperty Name="Classification" ColumnName="Classification" />
+          <ScalarProperty Name="SubClassification" ColumnName="SubClassification" />
+          <ScalarProperty Name="Solution" ColumnName="Solution" />
+          <ScalarProperty Name="OpenedBy" ColumnName="OpenedBy" />
+          <ScalarProperty Name="ResolvedBy" ColumnName="ResolvedBy" />
+          <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+          <ScalarProperty Name="CallFromEnsono" ColumnName="CallFromEnsono" />
+          <ScalarProperty Name="Escalation" ColumnName="Escalation" />
+          <ScalarProperty Name="LevelTimeForEscalation" ColumnName="LevelTimeForEscalation" />
+          <ScalarProperty Name="EscalatedTo" ColumnName="EscalatedTo" />
+          <ScalarProperty Name="EscalatedBy" ColumnName="EscalatedBy" />
+          <ScalarProperty Name="EscalatedDate" ColumnName="EscalatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="SLABreach" ColumnName="SLABreach" />
+          <ScalarProperty Name="SLABreachComments" ColumnName="SLABreachComments" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="PermanentFix" ColumnName="PermanentFix" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="p_GetAbendlogData" FunctionName="ASPAbendDataModel.Store.p_GetAbendlogData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetAbendlogData_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="JobName" ColumnName="JobName" />
+          <ScalarProperty Name="StepName" ColumnName="StepName" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="AbendCode" ColumnName="AbendCode" />
+          <ScalarProperty Name="AbendDescription" ColumnName="AbendDescription" />
+          <ScalarProperty Name="AbendDate" ColumnName="AbendDate" />
+          <ScalarProperty Name="AbendTime" ColumnName="AbendTime" />
+          <ScalarProperty Name="RestartTime" ColumnName="RestartTime" />
+          <ScalarProperty Name="OnCallAssociate" ColumnName="OnCallAssociate" />
+          <ScalarProperty Name="TimeSpend" ColumnName="TimeSpend" />
+          <ScalarProperty Name="RCA" ColumnName="RCA" />
+          <ScalarProperty Name="Classification" ColumnName="Classification" />
+          <ScalarProperty Name="Solution" ColumnName="Solution" />
+          <ScalarProperty Name="OpenedBy" ColumnName="OpenedBy" />
+          <ScalarProperty Name="ResolvedBy" ColumnName="ResolvedBy" />
+          <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+          <ScalarProperty Name="CallFromEnsono" ColumnName="CallFromEnsono" />
+          <ScalarProperty Name="Escalation" ColumnName="Escalation" />
+          <ScalarProperty Name="LevelTimeForEscalation" ColumnName="LevelTimeForEscalation" />
+          <ScalarProperty Name="EscalatedTo" ColumnName="EscalatedTo" />
+          <ScalarProperty Name="EscalatedBy" ColumnName="EscalatedBy" />
+          <ScalarProperty Name="EscalatedDate" ColumnName="EscalatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="SLABreach" ColumnName="SLABreach" />
+          <ScalarProperty Name="SLABreachComments" ColumnName="SLABreachComments" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="PermanentFix" ColumnName="PermanentFix" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="p_GetAbendlogDataByID" FunctionName="ASPAbendDataModel.Store.p_GetAbendlogDataByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetAbendlogDataByID_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="JobName" ColumnName="JobName" />
+          <ScalarProperty Name="StepName" ColumnName="StepName" />
+          <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+          <ScalarProperty Name="AbendCode" ColumnName="AbendCode" />
+          <ScalarProperty Name="AbendDescription" ColumnName="AbendDescription" />
+          <ScalarProperty Name="AbendDate" ColumnName="AbendDate" />
+          <ScalarProperty Name="AbendTime" ColumnName="AbendTime" />
+          <ScalarProperty Name="RestartTime" ColumnName="RestartTime" />
+          <ScalarProperty Name="OnCallAssociate" ColumnName="OnCallAssociate" />
+          <ScalarProperty Name="TimeSpend" ColumnName="TimeSpend" />
+          <ScalarProperty Name="RCA" ColumnName="RCA" />
+          <ScalarProperty Name="Classification" ColumnName="Classification" />
+          <ScalarProperty Name="SubClassification" ColumnName="SubClassification" />
+          <ScalarProperty Name="Solution" ColumnName="Solution" />
+          <ScalarProperty Name="OpenedBy" ColumnName="OpenedBy" />
+          <ScalarProperty Name="ResolvedBy" ColumnName="ResolvedBy" />
+          <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+          <ScalarProperty Name="CallFromEnsono" ColumnName="CallFromEnsono" />
+          <ScalarProperty Name="Escalation" ColumnName="Escalation" />
+          <ScalarProperty Name="LevelTimeForEscalation" ColumnName="LevelTimeForEscalation" />
+          <ScalarProperty Name="EscalatedTo" ColumnName="EscalatedTo" />
+          <ScalarProperty Name="EscalatedBy" ColumnName="EscalatedBy" />
+          <ScalarProperty Name="EscalatedDate" ColumnName="EscalatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="SLABreach" ColumnName="SLABreach" />
+          <ScalarProperty Name="SLABreachComments" ColumnName="SLABreachComments" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="PermanentFix" ColumnName="PermanentFix" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="p_GetInsertPermanentFixData" FunctionName="ASPAbendDataModel.Store.p_GetInsertPermanentFixData" />
+    <FunctionImportMapping FunctionImportName="p_GetPermanentFixData" FunctionName="ASPAbendDataModel.Store.p_GetPermanentFixData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetPermanentFixData_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+          <ScalarProperty Name="RCA" ColumnName="RCA" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="p_GetPermanentFixDataWithId" FunctionName="ASPAbendDataModel.Store.p_GetPermanentFixDataWithId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetPermanentFixDataWithId_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+          <ScalarProperty Name="RCA" ColumnName="RCA" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="p_GetReports" FunctionName="ASPAbendDataModel.Store.p_GetReports">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetReports_Result">
+          <ScalarProperty Name="Months" ColumnName="Months" />
+          <ScalarProperty Name="Years" ColumnName="Years" />
+          <ScalarProperty Name="TypeOfReport" ColumnName="TypeOfReport" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="p_LoginCredentials" FunctionName="ASPAbendDataModel.Store.p_LoginCredentials">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASPAbendDataModel.p_LoginCredentials_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LANID" ColumnName="LANID" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="p_UpdateAbendlogData" FunctionName="ASPAbendDataModel.Store.p_UpdateAbendlogData" />
+    <FunctionImportMapping FunctionImportName="p_UpdatePermanentFixDate" FunctionName="ASPAbendDataModel.Store.p_UpdatePermanentFixDate" />
+    <FunctionImportMapping FunctionImportName="p_InsertAbendLogData" FunctionName="ASPAbendDataModel.Store.p_InsertAbendLogData" />
+  </EntityContainerMapping>
+</Mapping>

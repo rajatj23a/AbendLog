@@ -1,0 +1,223 @@
+﻿@model AbendLog.Models.ReportViewModel
+@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_LayoutAbend.cshtml";
+
+}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divLoading").hide();
+
+        $("#btnReport").click(function () {
+
+        });
+
+        // Load google charts
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var dataPMS, dataExceed, dataPMSLine, dataExceedLine;
+            $.ajax({
+                url: '/Reports/GetAbendDetailsforCharts',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    dataPMS = google.visualization.arrayToDataTable([
+                        ['Abend Log Type', 'Count of Type'],
+                        ['Implementation', data.ClassficationTypeDetails[0]],
+                        ['Incoming Data', data.ClassficationTypeDetails[1]],
+                        ['Infrastructure', data.ClassficationTypeDetails[2]],
+                        ['Others', data.ClassficationTypeDetails[3]]
+                    ]);
+
+                    dataExceed = google.visualization.arrayToDataTable([
+                        ['Abend Log Type', 'Count of Type'],
+                        ['Implementation', data.ClassficationTypeDetails[4]],
+                        ['Incoming Data', data.ClassficationTypeDetails[5]],
+                        ['Infrastructure', data.ClassficationTypeDetails[6]],
+                        ['Others', data.ClassficationTypeDetails[7]]
+                    ]);
+
+                    dataPMSLine = google.visualization.arrayToDataTable([
+                        ['Abend Log', '2020 Abends', '2019 Abends'],
+                        ['Abend Log Count', data.ClassficationTypeDetails[24], data.ClassficationTypeDetails[25]],
+                        ['Implementation', data.ClassficationTypeDetails[8], data.ClassficationTypeDetails[16]],
+                        ['Incoming Data', data.ClassficationTypeDetails[9], data.ClassficationTypeDetails[17]],
+                        ['Infrastructure', data.ClassficationTypeDetails[10], data.ClassficationTypeDetails[18]],
+                        ['Others', data.ClassficationTypeDetails[11], data.ClassficationTypeDetails[19]]
+                    ]);
+
+                    dataExceedLine = google.visualization.arrayToDataTable([
+                        ['Abend Log', '2020 Abends', '2019 Abends'],
+                        ['Abend Log Count', data.ClassficationTypeDetails[26], data.ClassficationTypeDetails[27]],
+                        ['Implementation', data.ClassficationTypeDetails[12], data.ClassficationTypeDetails[20]],
+                        ['Incoming Data', data.ClassficationTypeDetails[13], data.ClassficationTypeDetails[21]],
+                        ['Infrastructure', data.ClassficationTypeDetails[14], data.ClassficationTypeDetails[22]],
+                        ['Others', data.ClassficationTypeDetails[15], data.ClassficationTypeDetails[23]]
+                    ]);
+
+                    // Optional; add a title and set the width and height of the chart
+                    var options = { 'title': 'Abend Log Brief Overview - PMS', 'width': 550, 'height': 350 };
+
+                    var optionsExceed = { 'title': 'Abend Log Brief Overview - Exceed', 'width': 550, 'height': 350 };
+
+                    // Display the chart inside the <div> element with id="piechart"
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(dataPMS, options);
+                    var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
+                    chart1.draw(dataExceed, optionsExceed);
+
+                    google.charts.load('current', { packages: ['corechart', 'bar'] });
+                    google.charts.setOnLoadCallback(drawMaterial);
+
+                    function drawMaterial() {
+
+
+                        var materialOptions = {
+                            chart: {
+                                title: 'PMS - Abend Log Type comparison of 2019 & 2020'
+                            },
+                            hAxis: {
+                                title: 'Total Population',
+                                minValue: 0,
+                            },
+                            vAxis: {
+                                title: 'Abend Log Type'
+                            },
+                            bars: 'horizontal'
+                        };
+                        var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+                        materialChart.draw(dataPMSLine, materialOptions);
+                    }
+
+                    google.charts.load('current', { packages: ['corechart', 'bar'] });
+                    google.charts.setOnLoadCallback(drawMaterial2);
+
+                    function drawMaterial2() {
+                        var materialOptions = {
+                            chart: {
+                                title: 'Exceed - Abend Log Type comparison of 2019 & 2020'
+                            },
+                            hAxis: {
+                                title: 'Total Population',
+                                minValue: 0,
+                            },
+                            vAxis: {
+                                title: 'Abend Log Type'
+                            },
+                            bars: 'horizontal'
+                        };
+                        var materialChart = new google.charts.Bar(document.getElementById('chart_div2'));
+                        materialChart.draw(dataExceedLine, materialOptions);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                    alert(status);
+                    alert(error);
+                }
+            });
+        }
+    });
+</script>
+<br />
+@using (Html.BeginForm("ExportToExcel", "Reports", FormMethod.Post, new { @id = "reportForm", @name = "reportForm" }))
+{
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Export Report</div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="Team">Team</label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        <select class="form-control" id="Team" name="Team" style="width:115px">
+                            <option value="">All</option>
+                            <option value="PMS">PMS</option>
+                            <option value="Exceed">Exceed</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="Region">Region</label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <select class="form-control" id="Region" name="Region" style="width:115px">
+                            <option value="">All</option>
+                            <option value="Model">Model</option>
+                            <option value="Production">Production</option>
+                            <option value="Month End">Month End</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Abend Date</label>
+                    </div>
+                    <div class="form-group input-group-sm col-md-offset col-md-4">
+                        @Html.EditorFor(model => model.AbendStartDate, new { @class = "form-control", @style = "max-width:130px!important;" })
+                        <b>To</b>
+                        @Html.EditorFor(model => model.AbendEndDate, new { @class = "form-control", @style = "max-width:130px!important;" })
+                    </div><div class="form-group col-md-offset col-md-2">
+                        <label for="Classfication">Classfication</label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        <select class="form-control" id="SelectClassification" name="SelectClassification" style="width:280px">
+                            <option value="">All</option>
+                            <option value="Implementation">Implementation</option>
+                            <option value="Infrastructure">Infrastructure</option>
+                            <option value="Incoming Data">Incoming Data</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <input id="btnReport" type="submit" class="btn btn-primary" value="Export To Excel" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <br />
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Abend Log Charts</div>
+        <div class="panel-body">
+            <div class="row">
+                <div style="text-align:center" class="form-group col-md-offset col-md-6">
+                    <div id="piechart"></div>
+                </div>
+                <div style="text-align:center" class="form-group col-md-offset col-md-6">
+                    <div id="piechart1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Abend Log Yearly Comparison</div>
+        <div class="panel-body">
+            <div class="row">
+                <div style="text-align:center" class="form-group col-md-offset col-md-12">
+                    <div id="chart_div"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div style="text-align:center" class="form-group col-md-offset col-md-12">
+                    <div id="chart_div2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

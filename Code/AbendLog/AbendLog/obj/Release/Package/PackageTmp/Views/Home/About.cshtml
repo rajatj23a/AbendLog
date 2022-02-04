@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_LayoutAbend.cshtml";
+}
+<br />
+<div class="panel panel-primary">
+
+    <div class="panel-heading">Logged In User Details</div>
+
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="form-group col-md-offset col-md-2">
+                <label for="incident">User Name</label>
+            </div>
+            <div class="form-group col-md-offset col-md-4">
+                @HttpContext.Current.Session["Name"].ToString()
+            </div>
+
+            <div class="form-group col-md-offset col-md-2">
+                <label for="SDate">Lan Id</label>
+            </div>
+            <div class="form-group col-md-offset col-md-4">
+                @HttpContext.Current.Session["LANID"].ToString()
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-offset col-md-2">
+                <label for="incident">Email Id</label>
+            </div>
+            <div class="form-group col-md-offset col-md-4">
+                @HttpContext.Current.Session["EmailId"].ToString()
+            </div>
+
+            <div class="form-group col-md-offset col-md-2">
+                <label for="SDate">Current DateTime</label>
+            </div>
+            <div class="form-group col-md-offset col-md-4">
+                @System.DateTime.Now.ToString()
+            </div>
+
+        </div>
+    </div>
+
+</div>

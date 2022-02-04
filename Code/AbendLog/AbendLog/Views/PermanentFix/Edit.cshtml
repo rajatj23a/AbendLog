@@ -1,0 +1,71 @@
+﻿
+@model AbendLog.Models.AbendLog
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAbend.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Edit PermanentFixes</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Incident Number<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.IncidentNumber, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter Incident Number here" })
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-offset col-md-2">
+                            <label for="City">RCA<font color="red">*</font></label>
+                        </div>
+                        <div class="form-group clockpicker col-md-offset col-md-4">
+                            <textarea style="width:300px;" class="form-control" rows="4" cols="50" placeholder="Enter Here"></textarea>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-offset col-md-2">
+                                <label for="City">Created By<font color="red">*</font></label>
+                            </div>
+                            <div class="form-group col-md-offset col-md-4">
+                                @Html.TextBoxFor(m => m.CreatedBy, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter Created By here" })
+                            </div>
+                            <div class="form-group col-md-offset col-md-2">
+                                <label for="service">Created Date<font color="red">*</font></label>
+                            </div>
+                            <div class="form-group input-group-sm col-md-offset col-md-4">
+                                @Html.EditorFor(model => model.CreatedDate, new { @class = "form-control datepicker" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-offset col-md-2">
+                                <label for="City">Modified By<font color="red">*</font></label>
+                            </div>
+                            <div class="form-group col-md-offset col-md-4">
+                                @Html.TextBoxFor(m => m.ModifiedBy, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter Modified By here" })
+                            </div>
+                            <div class="form-group col-md-offset col-md-2">
+                                <label for="service">Modified Date<font color="red">*</font></label>
+                            </div>
+                            <div class="form-group input-group-sm col-md-offset col-md-4">
+                                @Html.EditorFor(model => model.ModifiedDate, new { @class = "form-control datepicker" })
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div style="text-align:center!important;" id="divServiceActionPanel" class="form-group col-md-offset col-md-10">
+                            <input type="button" value="Update" id="btnLeadServiceSubmit" class="btn btn-primary" />
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}

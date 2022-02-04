@@ -1,0 +1,861 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ASPAbendDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AbendLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IncidentNumber" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Region" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="JobName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StepName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProgramName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AbendCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AbendDescription" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AbendDate" Type="datetime" Nullable="false" />
+          <Property Name="AbendTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="RestartTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="OnCallAssociate" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TimeSpend" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RCA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Classification" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Solution" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="OpenedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ResolvedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ResolvedDate" Type="datetime" Nullable="false" />
+          <Property Name="CallFromEnsono" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Escalation" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LevelTimeForEscalation" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EscalatedTo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EscalatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EscalatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SLABreach" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SLABreachComments" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Createdby" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Modifiedby" Type="varchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="PermanentFix" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PermanentFix">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IncidentNumber" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RCA" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Years" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Months" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="GeneratedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="GeneratedDate" Type="datetime" Nullable="false" />
+          <Property Name="TypeOfReport" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LANID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <Function Name="p_GetAbendlogData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+          <Parameter Name="Region" Type="varchar" Mode="In" />
+          <Parameter Name="JobName" Type="varchar" Mode="In" />
+          <Parameter Name="StepName" Type="varchar" Mode="In" />
+          <Parameter Name="ProgramName" Type="varchar" Mode="In" />
+          <Parameter Name="AbendCode" Type="varchar" Mode="In" />
+          <Parameter Name="AbendDescription" Type="varchar" Mode="In" />
+          <Parameter Name="AbendDate" Type="date" Mode="In" />
+          <Parameter Name="AbendTime" Type="time" Mode="In" />
+          <Parameter Name="RestartTime" Type="time" Mode="In" />
+          <Parameter Name="OnCallAssociate" Type="varchar" Mode="In" />
+          <Parameter Name="TimeSpend" Type="varchar" Mode="In" />
+          <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Classification" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Solution" Type="varchar" Mode="In" />
+          <Parameter Name="OpenedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ResolvedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ResolvedDate" Type="date" Mode="In" />
+          <Parameter Name="CallFromEnsono" Type="varchar" Mode="In" />
+          <Parameter Name="Escalation" Type="varchar" Mode="In" />
+          <Parameter Name="LevelTimeForEscalation" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedTo" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedBy" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedDate" Type="date" Mode="In" />
+          <Parameter Name="Status" Type="varchar" Mode="In" />
+          <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SLABreach" Type="varchar" Mode="In" />
+          <Parameter Name="SLABreachComments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Createdby" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedDate" Type="date" Mode="In" />
+          <Parameter Name="Modifiedby" Type="varchar" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+          <Parameter Name="PermanentFix" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="p_GetAbendlogDataByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+          <Parameter Name="Region" Type="varchar" Mode="In" />
+          <Parameter Name="JobName" Type="varchar" Mode="In" />
+          <Parameter Name="StepName" Type="varchar" Mode="In" />
+          <Parameter Name="ProgramName" Type="varchar" Mode="In" />
+          <Parameter Name="AbendCode" Type="varchar" Mode="In" />
+          <Parameter Name="AbendDescription" Type="varchar" Mode="In" />
+          <Parameter Name="AbendDate" Type="date" Mode="In" />
+          <Parameter Name="AbendTime" Type="time" Mode="In" />
+          <Parameter Name="RestartTime" Type="time" Mode="In" />
+          <Parameter Name="OnCallAssociate" Type="varchar" Mode="In" />
+          <Parameter Name="TimeSpend" Type="varchar" Mode="In" />
+          <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Classification" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Solution" Type="varchar" Mode="In" />
+          <Parameter Name="OpenedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ResolvedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ResolvedDate" Type="date" Mode="In" />
+          <Parameter Name="CallFromEnsono" Type="varchar" Mode="In" />
+          <Parameter Name="Escalation" Type="varchar" Mode="In" />
+          <Parameter Name="LevelTimeForEscalation" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedTo" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedBy" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedDate" Type="date" Mode="In" />
+          <Parameter Name="Status" Type="varchar" Mode="In" />
+          <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SLABreach" Type="varchar" Mode="In" />
+          <Parameter Name="SLABreachComments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Createdby" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedDate" Type="date" Mode="In" />
+          <Parameter Name="Modifiedby" Type="varchar" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+          <Parameter Name="PermanentFix" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="p_GetInsertPermanentFixData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+          <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedDate" Type="date" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="p_GetPermanentFixData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p_GetPermanentFixDataWithId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="p_GetReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p_InsertAbendLogData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+          <Parameter Name="Region" Type="varchar" Mode="In" />
+          <Parameter Name="JobName" Type="varchar" Mode="In" />
+          <Parameter Name="StepName" Type="varchar" Mode="In" />
+          <Parameter Name="ProgramName" Type="varchar" Mode="In" />
+          <Parameter Name="AbendCode" Type="varchar" Mode="In" />
+          <Parameter Name="AbendDescription" Type="varchar" Mode="In" />
+          <Parameter Name="AbendDate" Type="date" Mode="In" />
+          <Parameter Name="AbendTime" Type="time" Mode="In" />
+          <Parameter Name="RestartTime" Type="time" Mode="In" />
+          <Parameter Name="OnCallAssociate" Type="varchar" Mode="In" />
+          <Parameter Name="TimeSpend" Type="varchar" Mode="In" />
+          <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Classification" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Solution" Type="varchar" Mode="In" />
+          <Parameter Name="OpenedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ResolvedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ResolvedDate" Type="date" Mode="In" />
+          <Parameter Name="CallFromEnsono" Type="varchar" Mode="In" />
+          <Parameter Name="Escalation" Type="varchar" Mode="In" />
+          <Parameter Name="LevelTimeForEscalation" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedTo" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedBy" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedDate" Type="date" Mode="In" />
+          <Parameter Name="Status" Type="varchar" Mode="In" />
+          <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SLABreach" Type="varchar" Mode="In" />
+          <Parameter Name="SLABreachComments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Createdby" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedDate" Type="date" Mode="In" />
+          <Parameter Name="Modifiedby" Type="varchar" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+          <Parameter Name="PermanentFix" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="p_LoginCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LANID" Type="nvarchar" Mode="In" />
+          <Parameter Name="PASSWORD" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="p_UpdateAbendlogData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+          <Parameter Name="Region" Type="varchar" Mode="In" />
+          <Parameter Name="JobName" Type="varchar" Mode="In" />
+          <Parameter Name="StepName" Type="varchar" Mode="In" />
+          <Parameter Name="ProgramName" Type="varchar" Mode="In" />
+          <Parameter Name="AbendCode" Type="varchar" Mode="In" />
+          <Parameter Name="AbendDescription" Type="varchar" Mode="In" />
+          <Parameter Name="AbendDate" Type="date" Mode="In" />
+          <Parameter Name="AbendTime" Type="time" Mode="In" />
+          <Parameter Name="RestartTime" Type="time" Mode="In" />
+          <Parameter Name="OnCallAssociate" Type="varchar" Mode="In" />
+          <Parameter Name="TimeSpend" Type="varchar" Mode="In" />
+          <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Classification" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Solution" Type="varchar" Mode="In" />
+          <Parameter Name="OpenedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ResolvedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ResolvedDate" Type="date" Mode="In" />
+          <Parameter Name="CallFromEnsono" Type="varchar" Mode="In" />
+          <Parameter Name="Escalation" Type="varchar" Mode="In" />
+          <Parameter Name="LevelTimeForEscalation" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedTo" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedBy" Type="varchar" Mode="In" />
+          <Parameter Name="EscalatedDate" Type="date" Mode="In" />
+          <Parameter Name="Status" Type="varchar" Mode="In" />
+          <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SLABreach" Type="varchar" Mode="In" />
+          <Parameter Name="SLABreachComments" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Createdby" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedDate" Type="date" Mode="In" />
+          <Parameter Name="Modifiedby" Type="varchar" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+          <Parameter Name="PermanentFix" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="p_UpdatePermanentFixDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+          <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedDate" Type="date" Mode="In" />
+          <Parameter Name="ModifiedBy" Type="varchar" Mode="In" />
+          <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="ASPAbendDataModelStoreContainer">
+          <EntitySet Name="AbendLog" EntityType="Self.AbendLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PermanentFix" EntityType="Self.PermanentFix" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTbl" EntityType="Self.UserTbl" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ASPAbendDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AbendLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncidentNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Region" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JobName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StepName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProgramName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AbendCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AbendDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AbendDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AbendTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RestartTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OnCallAssociate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TimeSpend" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RCA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Classification" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Solution" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OpenedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResolvedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResolvedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CallFromEnsono" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Escalation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LevelTimeForEscalation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EscalatedTo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EscalatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EscalatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SLABreach" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SLABreachComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Createdby" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modifiedby" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="PermanentFix" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PermanentFix">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncidentNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RCA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Years" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Months" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GeneratedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GeneratedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TypeOfReport" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LANID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="ASPAbendDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AbendLogs" EntityType="Self.AbendLog" />
+          <EntitySet Name="PermanentFixes" EntityType="Self.PermanentFix" />
+          <EntitySet Name="Reports" EntityType="Self.Report" />
+          <EntitySet Name="UserTbls" EntityType="Self.UserTbl" />
+          <FunctionImport Name="p_GetAbendlogData" ReturnType="Collection(ASPAbendDataModel.p_GetAbendlogData_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="IncidentNumber" Mode="In" Type="String" />
+            <Parameter Name="Region" Mode="In" Type="String" />
+            <Parameter Name="JobName" Mode="In" Type="String" />
+            <Parameter Name="StepName" Mode="In" Type="String" />
+            <Parameter Name="ProgramName" Mode="In" Type="String" />
+            <Parameter Name="AbendCode" Mode="In" Type="String" />
+            <Parameter Name="AbendDescription" Mode="In" Type="String" />
+            <Parameter Name="AbendDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AbendTime" Mode="In" Type="Time" />
+            <Parameter Name="RestartTime" Mode="In" Type="Time" />
+            <Parameter Name="OnCallAssociate" Mode="In" Type="String" />
+            <Parameter Name="TimeSpend" Mode="In" Type="String" />
+            <Parameter Name="RCA" Mode="In" Type="String" />
+            <Parameter Name="Classification" Mode="In" Type="String" />
+            <Parameter Name="Solution" Mode="In" Type="String" />
+            <Parameter Name="OpenedBy" Mode="In" Type="String" />
+            <Parameter Name="ResolvedBy" Mode="In" Type="String" />
+            <Parameter Name="ResolvedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CallFromEnsono" Mode="In" Type="String" />
+            <Parameter Name="Escalation" Mode="In" Type="String" />
+            <Parameter Name="LevelTimeForEscalation" Mode="In" Type="String" />
+            <Parameter Name="EscalatedTo" Mode="In" Type="String" />
+            <Parameter Name="EscalatedBy" Mode="In" Type="String" />
+            <Parameter Name="EscalatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Comments" Mode="In" Type="String" />
+            <Parameter Name="SLABreach" Mode="In" Type="String" />
+            <Parameter Name="SLABreachComments" Mode="In" Type="String" />
+            <Parameter Name="Createdby" Mode="In" Type="String" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Modifiedby" Mode="In" Type="String" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PermanentFix" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="p_GetAbendlogDataByID" ReturnType="Collection(ASPAbendDataModel.p_GetAbendlogDataByID_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="IncidentNumber" Mode="In" Type="String" />
+            <Parameter Name="Region" Mode="In" Type="String" />
+            <Parameter Name="JobName" Mode="In" Type="String" />
+            <Parameter Name="StepName" Mode="In" Type="String" />
+            <Parameter Name="ProgramName" Mode="In" Type="String" />
+            <Parameter Name="AbendCode" Mode="In" Type="String" />
+            <Parameter Name="AbendDescription" Mode="In" Type="String" />
+            <Parameter Name="AbendDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AbendTime" Mode="In" Type="Time" />
+            <Parameter Name="RestartTime" Mode="In" Type="Time" />
+            <Parameter Name="OnCallAssociate" Mode="In" Type="String" />
+            <Parameter Name="TimeSpend" Mode="In" Type="String" />
+            <Parameter Name="RCA" Mode="In" Type="String" />
+            <Parameter Name="Classification" Mode="In" Type="String" />
+            <Parameter Name="Solution" Mode="In" Type="String" />
+            <Parameter Name="OpenedBy" Mode="In" Type="String" />
+            <Parameter Name="ResolvedBy" Mode="In" Type="String" />
+            <Parameter Name="ResolvedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CallFromEnsono" Mode="In" Type="String" />
+            <Parameter Name="Escalation" Mode="In" Type="String" />
+            <Parameter Name="LevelTimeForEscalation" Mode="In" Type="String" />
+            <Parameter Name="EscalatedTo" Mode="In" Type="String" />
+            <Parameter Name="EscalatedBy" Mode="In" Type="String" />
+            <Parameter Name="EscalatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Comments" Mode="In" Type="String" />
+            <Parameter Name="SLABreach" Mode="In" Type="String" />
+            <Parameter Name="SLABreachComments" Mode="In" Type="String" />
+            <Parameter Name="Createdby" Mode="In" Type="String" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Modifiedby" Mode="In" Type="String" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PermanentFix" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="p_GetInsertPermanentFixData">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="IncidentNumber" Mode="In" Type="String" />
+            <Parameter Name="RCA" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="p_GetPermanentFixData" ReturnType="Collection(ASPAbendDataModel.p_GetPermanentFixData_Result)" />
+          <FunctionImport Name="p_GetPermanentFixDataWithId" ReturnType="Collection(ASPAbendDataModel.p_GetPermanentFixDataWithId_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_GetReports" ReturnType="Collection(ASPAbendDataModel.p_GetReports_Result)" />
+          <FunctionImport Name="p_InsertAbendLogData">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="IncidentNumber" Mode="In" Type="String" />
+            <Parameter Name="Region" Mode="In" Type="String" />
+            <Parameter Name="JobName" Mode="In" Type="String" />
+            <Parameter Name="StepName" Mode="In" Type="String" />
+            <Parameter Name="ProgramName" Mode="In" Type="String" />
+            <Parameter Name="AbendCode" Mode="In" Type="String" />
+            <Parameter Name="AbendDescription" Mode="In" Type="String" />
+            <Parameter Name="AbendDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AbendTime" Mode="In" Type="Time" />
+            <Parameter Name="RestartTime" Mode="In" Type="Time" />
+            <Parameter Name="OnCallAssociate" Mode="In" Type="String" />
+            <Parameter Name="TimeSpend" Mode="In" Type="String" />
+            <Parameter Name="RCA" Mode="In" Type="String" />
+            <Parameter Name="Classification" Mode="In" Type="String" />
+            <Parameter Name="Solution" Mode="In" Type="String" />
+            <Parameter Name="OpenedBy" Mode="In" Type="String" />
+            <Parameter Name="ResolvedBy" Mode="In" Type="String" />
+            <Parameter Name="ResolvedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CallFromEnsono" Mode="In" Type="String" />
+            <Parameter Name="Escalation" Mode="In" Type="String" />
+            <Parameter Name="LevelTimeForEscalation" Mode="In" Type="String" />
+            <Parameter Name="EscalatedTo" Mode="In" Type="String" />
+            <Parameter Name="EscalatedBy" Mode="In" Type="String" />
+            <Parameter Name="EscalatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Comments" Mode="In" Type="String" />
+            <Parameter Name="SLABreach" Mode="In" Type="String" />
+            <Parameter Name="SLABreachComments" Mode="In" Type="String" />
+            <Parameter Name="Createdby" Mode="In" Type="String" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Modifiedby" Mode="In" Type="String" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PermanentFix" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="p_LoginCredentials" ReturnType="Collection(ASPAbendDataModel.p_LoginCredentials_Result)">
+            <Parameter Name="LANID" Mode="In" Type="String" />
+            <Parameter Name="PASSWORD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="p_UpdateAbendlogData">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="IncidentNumber" Mode="In" Type="String" />
+            <Parameter Name="Region" Mode="In" Type="String" />
+            <Parameter Name="JobName" Mode="In" Type="String" />
+            <Parameter Name="StepName" Mode="In" Type="String" />
+            <Parameter Name="ProgramName" Mode="In" Type="String" />
+            <Parameter Name="AbendCode" Mode="In" Type="String" />
+            <Parameter Name="AbendDescription" Mode="In" Type="String" />
+            <Parameter Name="AbendDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AbendTime" Mode="In" Type="Time" />
+            <Parameter Name="RestartTime" Mode="In" Type="Time" />
+            <Parameter Name="OnCallAssociate" Mode="In" Type="String" />
+            <Parameter Name="TimeSpend" Mode="In" Type="String" />
+            <Parameter Name="RCA" Mode="In" Type="String" />
+            <Parameter Name="Classification" Mode="In" Type="String" />
+            <Parameter Name="Solution" Mode="In" Type="String" />
+            <Parameter Name="OpenedBy" Mode="In" Type="String" />
+            <Parameter Name="ResolvedBy" Mode="In" Type="String" />
+            <Parameter Name="ResolvedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CallFromEnsono" Mode="In" Type="String" />
+            <Parameter Name="Escalation" Mode="In" Type="String" />
+            <Parameter Name="LevelTimeForEscalation" Mode="In" Type="String" />
+            <Parameter Name="EscalatedTo" Mode="In" Type="String" />
+            <Parameter Name="EscalatedBy" Mode="In" Type="String" />
+            <Parameter Name="EscalatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Comments" Mode="In" Type="String" />
+            <Parameter Name="SLABreach" Mode="In" Type="String" />
+            <Parameter Name="SLABreachComments" Mode="In" Type="String" />
+            <Parameter Name="Createdby" Mode="In" Type="String" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Modifiedby" Mode="In" Type="String" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PermanentFix" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="p_UpdatePermanentFixDate">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="IncidentNumber" Mode="In" Type="String" />
+            <Parameter Name="RCA" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+            <Parameter Name="CreatedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="p_GetAbendlogData_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="IncidentNumber" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Region" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="JobName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="StepName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ProgramName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="AbendCode" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="AbendDescription" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="AbendDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="AbendTime" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="RestartTime" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="OnCallAssociate" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TimeSpend" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="RCA" Nullable="false" />
+          <Property Type="String" Name="Classification" Nullable="false" />
+          <Property Type="String" Name="Solution" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="OpenedBy" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ResolvedBy" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="ResolvedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CallFromEnsono" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Escalation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LevelTimeForEscalation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EscalatedTo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EscalatedBy" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="EscalatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Comments" Nullable="false" />
+          <Property Type="String" Name="SLABreach" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SLABreachComments" Nullable="false" />
+          <Property Type="String" Name="Createdby" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Modifiedby" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="PermanentFix" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="p_GetAbendlogDataByID_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="IncidentNumber" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Region" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="JobName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="StepName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ProgramName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="AbendCode" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="AbendDescription" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="AbendDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="AbendTime" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="RestartTime" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="OnCallAssociate" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TimeSpend" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="RCA" Nullable="false" />
+          <Property Type="String" Name="Classification" Nullable="false" />
+          <Property Type="String" Name="Solution" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="OpenedBy" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ResolvedBy" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="ResolvedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CallFromEnsono" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Escalation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LevelTimeForEscalation" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EscalatedTo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EscalatedBy" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="EscalatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Comments" Nullable="false" />
+          <Property Type="String" Name="SLABreach" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="SLABreachComments" Nullable="false" />
+          <Property Type="String" Name="Createdby" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Modifiedby" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="PermanentFix" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="p_GetPermanentFixData_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="IncidentNumber" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="RCA" Nullable="false" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="p_GetPermanentFixDataWithId_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="IncidentNumber" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="RCA" Nullable="false" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="p_GetReports_Result">
+          <Property Type="String" Name="Months" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Years" Nullable="false" MaxLength="100" />
+          <Property Type="Byte" Name="TypeOfReport" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="p_LoginCredentials_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LANID" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="EmailID" Nullable="false" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ASPAbendDataModelStoreContainer" CdmEntityContainer="ASPAbendDataEntities">
+          <EntitySetMapping Name="AbendLogs">
+            <EntityTypeMapping TypeName="ASPAbendDataModel.AbendLog">
+              <MappingFragment StoreEntitySet="AbendLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="JobName" ColumnName="JobName" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="AbendCode" ColumnName="AbendCode" />
+                <ScalarProperty Name="AbendDescription" ColumnName="AbendDescription" />
+                <ScalarProperty Name="AbendDate" ColumnName="AbendDate" />
+                <ScalarProperty Name="AbendTime" ColumnName="AbendTime" />
+                <ScalarProperty Name="RestartTime" ColumnName="RestartTime" />
+                <ScalarProperty Name="OnCallAssociate" ColumnName="OnCallAssociate" />
+                <ScalarProperty Name="TimeSpend" ColumnName="TimeSpend" />
+                <ScalarProperty Name="RCA" ColumnName="RCA" />
+                <ScalarProperty Name="Classification" ColumnName="Classification" />
+                <ScalarProperty Name="Solution" ColumnName="Solution" />
+                <ScalarProperty Name="OpenedBy" ColumnName="OpenedBy" />
+                <ScalarProperty Name="ResolvedBy" ColumnName="ResolvedBy" />
+                <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+                <ScalarProperty Name="CallFromEnsono" ColumnName="CallFromEnsono" />
+                <ScalarProperty Name="Escalation" ColumnName="Escalation" />
+                <ScalarProperty Name="LevelTimeForEscalation" ColumnName="LevelTimeForEscalation" />
+                <ScalarProperty Name="EscalatedTo" ColumnName="EscalatedTo" />
+                <ScalarProperty Name="EscalatedBy" ColumnName="EscalatedBy" />
+                <ScalarProperty Name="EscalatedDate" ColumnName="EscalatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="SLABreach" ColumnName="SLABreach" />
+                <ScalarProperty Name="SLABreachComments" ColumnName="SLABreachComments" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="PermanentFix" ColumnName="PermanentFix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermanentFixes">
+            <EntityTypeMapping TypeName="ASPAbendDataModel.PermanentFix">
+              <MappingFragment StoreEntitySet="PermanentFix">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+                <ScalarProperty Name="RCA" ColumnName="RCA" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="ASPAbendDataModel.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Years" ColumnName="Years" />
+                <ScalarProperty Name="Months" ColumnName="Months" />
+                <ScalarProperty Name="GeneratedBy" ColumnName="GeneratedBy" />
+                <ScalarProperty Name="GeneratedDate" ColumnName="GeneratedDate" />
+                <ScalarProperty Name="TypeOfReport" ColumnName="TypeOfReport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTbls">
+            <EntityTypeMapping TypeName="ASPAbendDataModel.UserTbl">
+              <MappingFragment StoreEntitySet="UserTbl">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="LANID" ColumnName="LANID" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="p_GetAbendlogData" FunctionName="ASPAbendDataModel.Store.p_GetAbendlogData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetAbendlogData_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="JobName" ColumnName="JobName" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="AbendCode" ColumnName="AbendCode" />
+                <ScalarProperty Name="AbendDescription" ColumnName="AbendDescription" />
+                <ScalarProperty Name="AbendDate" ColumnName="AbendDate" />
+                <ScalarProperty Name="AbendTime" ColumnName="AbendTime" />
+                <ScalarProperty Name="RestartTime" ColumnName="RestartTime" />
+                <ScalarProperty Name="OnCallAssociate" ColumnName="OnCallAssociate" />
+                <ScalarProperty Name="TimeSpend" ColumnName="TimeSpend" />
+                <ScalarProperty Name="RCA" ColumnName="RCA" />
+                <ScalarProperty Name="Classification" ColumnName="Classification" />
+                <ScalarProperty Name="Solution" ColumnName="Solution" />
+                <ScalarProperty Name="OpenedBy" ColumnName="OpenedBy" />
+                <ScalarProperty Name="ResolvedBy" ColumnName="ResolvedBy" />
+                <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+                <ScalarProperty Name="CallFromEnsono" ColumnName="CallFromEnsono" />
+                <ScalarProperty Name="Escalation" ColumnName="Escalation" />
+                <ScalarProperty Name="LevelTimeForEscalation" ColumnName="LevelTimeForEscalation" />
+                <ScalarProperty Name="EscalatedTo" ColumnName="EscalatedTo" />
+                <ScalarProperty Name="EscalatedBy" ColumnName="EscalatedBy" />
+                <ScalarProperty Name="EscalatedDate" ColumnName="EscalatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="SLABreach" ColumnName="SLABreach" />
+                <ScalarProperty Name="SLABreachComments" ColumnName="SLABreachComments" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="PermanentFix" ColumnName="PermanentFix" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_GetAbendlogDataByID" FunctionName="ASPAbendDataModel.Store.p_GetAbendlogDataByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetAbendlogDataByID_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="JobName" ColumnName="JobName" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="AbendCode" ColumnName="AbendCode" />
+                <ScalarProperty Name="AbendDescription" ColumnName="AbendDescription" />
+                <ScalarProperty Name="AbendDate" ColumnName="AbendDate" />
+                <ScalarProperty Name="AbendTime" ColumnName="AbendTime" />
+                <ScalarProperty Name="RestartTime" ColumnName="RestartTime" />
+                <ScalarProperty Name="OnCallAssociate" ColumnName="OnCallAssociate" />
+                <ScalarProperty Name="TimeSpend" ColumnName="TimeSpend" />
+                <ScalarProperty Name="RCA" ColumnName="RCA" />
+                <ScalarProperty Name="Classification" ColumnName="Classification" />
+                <ScalarProperty Name="Solution" ColumnName="Solution" />
+                <ScalarProperty Name="OpenedBy" ColumnName="OpenedBy" />
+                <ScalarProperty Name="ResolvedBy" ColumnName="ResolvedBy" />
+                <ScalarProperty Name="ResolvedDate" ColumnName="ResolvedDate" />
+                <ScalarProperty Name="CallFromEnsono" ColumnName="CallFromEnsono" />
+                <ScalarProperty Name="Escalation" ColumnName="Escalation" />
+                <ScalarProperty Name="LevelTimeForEscalation" ColumnName="LevelTimeForEscalation" />
+                <ScalarProperty Name="EscalatedTo" ColumnName="EscalatedTo" />
+                <ScalarProperty Name="EscalatedBy" ColumnName="EscalatedBy" />
+                <ScalarProperty Name="EscalatedDate" ColumnName="EscalatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="SLABreach" ColumnName="SLABreach" />
+                <ScalarProperty Name="SLABreachComments" ColumnName="SLABreachComments" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Modifiedby" ColumnName="Modifiedby" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="PermanentFix" ColumnName="PermanentFix" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_GetInsertPermanentFixData" FunctionName="ASPAbendDataModel.Store.p_GetInsertPermanentFixData" />
+          <FunctionImportMapping FunctionImportName="p_GetPermanentFixData" FunctionName="ASPAbendDataModel.Store.p_GetPermanentFixData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetPermanentFixData_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+                <ScalarProperty Name="RCA" ColumnName="RCA" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_GetPermanentFixDataWithId" FunctionName="ASPAbendDataModel.Store.p_GetPermanentFixDataWithId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetPermanentFixDataWithId_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IncidentNumber" ColumnName="IncidentNumber" />
+                <ScalarProperty Name="RCA" ColumnName="RCA" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_GetReports" FunctionName="ASPAbendDataModel.Store.p_GetReports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASPAbendDataModel.p_GetReports_Result">
+                <ScalarProperty Name="Months" ColumnName="Months" />
+                <ScalarProperty Name="Years" ColumnName="Years" />
+                <ScalarProperty Name="TypeOfReport" ColumnName="TypeOfReport" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_InsertAbendLogData" FunctionName="ASPAbendDataModel.Store.p_InsertAbendLogData" />
+          <FunctionImportMapping FunctionImportName="p_LoginCredentials" FunctionName="ASPAbendDataModel.Store.p_LoginCredentials">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ASPAbendDataModel.p_LoginCredentials_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LANID" ColumnName="LANID" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_UpdateAbendlogData" FunctionName="ASPAbendDataModel.Store.p_UpdateAbendlogData" />
+          <FunctionImportMapping FunctionImportName="p_UpdatePermanentFixDate" FunctionName="ASPAbendDataModel.Store.p_UpdatePermanentFixDate" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

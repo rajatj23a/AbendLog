@@ -1,0 +1,356 @@
+﻿@model AbendLog.Models.LandingPageInfocs
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutAbend.cshtml";
+}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<style>
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border-radius: 15px;
+    }
+
+    .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50;
+        border-radius: 15px;
+    }
+
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 15px;
+        }
+
+    .button2 {
+        background-color: white;
+        color: black;
+        border: 2px solid #008CBA;
+        border-radius: 15px;
+    }
+
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+            border-radius: 15px;
+        }
+
+    .button3 {
+        background-color: white;
+        color: black;
+        border: 2px solid #f44336;
+        border-radius: 15px;
+    }
+
+        .button3:hover {
+            background-color: #f44336;
+            color: white;
+            border-radius: 15px;
+        }
+
+    .button4 {
+        background-color: white;
+        color: black;
+        border: 2px solid cornflowerblue;
+        border-radius: 15px;
+    }
+
+        .button4:hover {
+            background-color: cornflowerblue;
+            border-radius: 15px;
+        }
+
+    .button5 {
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+        border-radius: 15px;
+    }
+
+        .button5:hover {
+            background-color: #555555;
+            color: white;
+            border-radius: 15px;
+        }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divLoading").hide();
+        // Load google charts
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var dataPMS, dataExceed, dataPMSLine, dataExceedLine;
+            $.ajax({
+                url: '/AbendLog/GetAbendDetailsforCharts',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    dataPMS = google.visualization.arrayToDataTable([
+                        ['Abend Log Type', 'Count of Type'],
+                        ['Implementation', data.ClassficationTypeDetails[0]],
+                        ['Incoming Data', data.ClassficationTypeDetails[1]],
+                        ['Infrastructure', data.ClassficationTypeDetails[2]],
+                        ['Others', data.ClassficationTypeDetails[3]]
+                    ]);
+
+                    dataExceed = google.visualization.arrayToDataTable([
+                        ['Abend Log Type', 'Count of Type'],
+                        ['Implementation', data.ClassficationTypeDetails[4]],
+                        ['Incoming Data', data.ClassficationTypeDetails[5]],
+                        ['Infrastructure', data.ClassficationTypeDetails[6]],
+                        ['Others', data.ClassficationTypeDetails[7]]
+                    ]);
+
+                    dataPMSLine = google.visualization.arrayToDataTable([
+                        ['Abend Log', '2020 Abends', '2019 Abends'],
+                        ['Abend Log Count', data.ClassficationTypeDetails[24], data.ClassficationTypeDetails[25]],
+                        ['Implementation', data.ClassficationTypeDetails[8], data.ClassficationTypeDetails[16]],
+                        ['Incoming Data', data.ClassficationTypeDetails[9], data.ClassficationTypeDetails[17]],
+                        ['Infrastructure', data.ClassficationTypeDetails[10], data.ClassficationTypeDetails[18]],
+                        ['Others', data.ClassficationTypeDetails[11], data.ClassficationTypeDetails[19]]
+                    ]);
+
+                    dataExceedLine = google.visualization.arrayToDataTable([
+                        ['Abend Log', '2020 Abends', '2019 Abends'],
+                        ['Abend Log Count', data.ClassficationTypeDetails[26], data.ClassficationTypeDetails[27]],
+                        ['Implementation', data.ClassficationTypeDetails[12], data.ClassficationTypeDetails[20]],
+                        ['Incoming Data', data.ClassficationTypeDetails[13], data.ClassficationTypeDetails[21]],
+                        ['Infrastructure', data.ClassficationTypeDetails[14], data.ClassficationTypeDetails[22]],
+                        ['Others', data.ClassficationTypeDetails[15], data.ClassficationTypeDetails[23]]
+                    ]);
+
+                    // Optional; add a title and set the width and height of the chart
+                    var options = { 'title': 'Abend Log Brief Overview - PMS', 'width': 550, 'height': 350 };
+
+                    var optionsExceed = { 'title': 'Abend Log Brief Overview - Exceed', 'width': 550, 'height': 350 };
+
+                    // Display the chart inside the <div> element with id="piechart"
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(dataPMS, options);
+                    var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
+                    chart1.draw(dataExceed, optionsExceed);
+
+                    google.charts.load('current', { packages: ['corechart', 'bar'] });
+                    google.charts.setOnLoadCallback(drawMaterial);
+                    
+                    function drawMaterial() {
+                        
+
+                        var materialOptions = {
+                            chart: {
+                                title: 'PMS - Abend Log Type comparison of 2019 & 2020'
+                            },
+                            hAxis: {
+                                title: 'Total Population',
+                                minValue: 0,
+                            },
+                            vAxis: {
+                                title: 'Abend Log Type'
+                            },
+                            bars: 'horizontal'
+                        };
+                        var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+                        materialChart.draw(dataPMSLine, materialOptions);
+                    }
+
+                    google.charts.load('current', { packages: ['corechart', 'bar'] });
+                    google.charts.setOnLoadCallback(drawMaterial2);
+
+                    function drawMaterial2() {
+                        var materialOptions = {
+                            chart: {
+                                title: 'Exceed - Abend Log Type comparison of 2019 & 2020'
+                            },
+                            hAxis: {
+                                title: 'Total Population',
+                                minValue: 0,
+                            },
+                            vAxis: {
+                                title: 'Abend Log Type'
+                            },
+                            bars: 'horizontal'
+                        };
+                        var materialChart = new google.charts.Bar(document.getElementById('chart_div2'));
+                        materialChart.draw(dataExceedLine, materialOptions);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                    alert(status);
+                    alert(error);
+                }
+            });
+        }
+    });
+</script>
+
+
+
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<div class="jumbotron">
+    <h2>Dashboard</h2>
+</div>
+
+<marquee behavior="scroll" direction="left"><h4>Hello @HttpContext.Current.Session["Name"].ToString()! Welcome to Abend Log Dashboard</h4></marquee>
+
+<div class="panel-group">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Abend Log Brief Overview - PMS</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-md-offset col-md-4">
+                    <a class="button button5" href="/AbendLog/List">Abend Log Count: @Model.AbendLogRecordsPMS</a>
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                </div>
+                <div class="form-group col-md-offset col-md-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-offset col-md-3">
+                    <a class="button button1" href="/AbendLog/List?selectClassification=Implementation&team=PMS">Implementation: @Model.ClassficationTypeDetails[0]</a>
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                    <a class="button button2" href="/AbendLog/List?selectClassification=Incoming Data&team=PMS">Incoming Data: @Model.ClassficationTypeDetails[1]</a>
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                    <a class="button button3" href="/AbendLog/List?selectClassification=Infrastructure&team=PMS">Infrastructure: @Model.ClassficationTypeDetails[2]</a>
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                    <a class="button button4" href="/AbendLog/List?selectClassification=Others&team=PMS">Others: @Model.ClassficationTypeDetails[3]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Abend Log Brief Overview - Exceed</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-md-offset col-md-4">
+                    <a class="button button5" href="/AbendLog/List">Abend Log Count: @Model.AbendLogRecordsExceed</a>
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                    <label for="SDate"></label>
+                </div>
+                <div class="form-group col-md-offset col-md-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-offset col-md-3">
+                    <a class="button button1" href="/AbendLog/List?selectClassification=Implementation&team=Exceed">Implementation: @Model.ClassficationTypeDetails[4]</a>
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                    <a class="button button2" href="/AbendLog/List?selectClassification=Incoming Data&team=Exceed">Incoming Data: @Model.ClassficationTypeDetails[5]</a>
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                    <a class="button button3" href="/AbendLog/List?selectClassification=Infrastructure&team=Exceed">Infrastructure: @Model.ClassficationTypeDetails[6]</a>
+                </div>
+                <div class="form-group col-md-offset col-md-3">
+                    <a class="button button4" href="/AbendLog/List?selectClassification=Others&team=Exceed">Others: @Model.ClassficationTypeDetails[7]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Permanent Fix Brief Overview - PMS</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-md-offset col-md-4">
+                    <a class="button button5" href="/PermanentFix/Index">Permanent Fixes Count: @Model.PermanentFixRecordsPMS</a>
+                </div>
+                <div class="form-group col-md-offset col-md-4">
+
+                </div>
+
+                <div class="form-group col-md-offset col-md-2">
+
+                </div>
+
+                <div class="form-group col-md-offset col-md-4">
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Permanent Fix Brief Overview - Exceed</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-md-offset col-md-4">
+                    <a class="button button5" href="/PermanentFix/Index">Permanent Fixes Count: @Model.PermanentFixRecordsExceed</a>
+                </div>
+                <div class="form-group col-md-offset col-md-4">
+                </div>
+
+                <div class="form-group col-md-offset col-md-2">
+
+                </div>
+
+                <div class="form-group col-md-offset col-md-4">
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    
+
+</div>
+<br />
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Abend Log Charts</div>
+        <div class="panel-body">
+            <div class="row">
+                <div style="text-align:center" class="form-group col-md-offset col-md-6">
+                    <div id="piechart"></div>
+                </div>
+                <div style="text-align:center" class="form-group col-md-offset col-md-6">
+                    <div id="piechart1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Abend Log Yearly Comparison</div>
+        <div class="panel-body">
+            <div class="row">
+                <div style="text-align:center" class="form-group col-md-offset col-md-12">
+                    <div id="chart_div"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div style="text-align:center" class="form-group col-md-offset col-md-12">
+                    <div id="chart_div2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

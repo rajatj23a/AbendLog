@@ -1,0 +1,185 @@
+﻿
+@model AbendLog.BusinessAccess.Model.PermanentFixData
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAbend.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Team").select2();
+        $("#divLoading").hide();
+        $("#EndDate").removeClass("text - box single - line").addClass("form-control text - box single - line");
+        $("#StartDate").removeClass("text - box single - line").addClass("form-control text - box single - line");
+
+        $("#btnLeadServiceSubmit").click(function () {
+            var errorMsg = '';
+
+            if ($("#IncidentNumber").val().trim() == '') {
+                errorMsg = "Please enter the Incident Number\n";
+            }
+            if ($("#RCA").val().trim() == '') {
+                errorMsg += "Please enter the RCA\n";
+            }
+            if ($("#Comments").val().trim() == '') {
+                errorMsg += "Please enter the Comments\n";
+            }
+            if ($("#Comments").val().trim() == '') {
+                $("#Comments").focus();
+            }
+            if ($("#RCA").val().trim() == '') {
+                $("#RCA").focus();
+            }
+            if ($("#IncidentNumber").val().trim() == '') {
+                $("#IncidentNumber").focus();
+            }
+            if (errorMsg != '') {
+                alert(errorMsg);
+                return false;
+            }
+            else {
+                return true;
+            }
+
+        })
+    });
+
+</script>
+
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<br />
+@using (Html.BeginForm("EditPF", "PermanentFix", FormMethod.Post, new { @id = "editPermanentFix" }))
+{
+    @Html.HiddenFor(m => m.ID)
+    @Html.AntiForgeryToken()
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Edit Permanent Fixes</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Incident Number<font color="red">*</font></label>
+                    </div>
+
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.IncidentNumber, null, new { @class = "form-control", @maxlength = "30", @placeholder = "Enter Incident Number here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">RCA<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.RCA, null, new { @class = "form-control", @maxlength = "10000", @placeholder = "Enter RCA here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Temporarily Resolution<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.TemporarilyResolution, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Proposed Permanent Fix<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.ProposedPermanentFix, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Component Fixed<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.ComponentFixed, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Fix Status<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.FixStatus, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Start Date<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.EditorFor(m => m.StartDate, null, new { @class = "form-control datepicker", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">End Date<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.EditorFor(m => m.EndDate, null, new { @class = "form-control datepicker", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Comments<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.Comments, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Resources<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.Resources, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Reviewer<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.Reviewer, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Issues<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.Issues, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Team<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        <select class="form-control" id="Team" name="Team" style="width:118px">
+                            <option value="PMS">PMS</option>
+                            <option value="Exceed">Exceed</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Approval For The Proposal<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.ApprovalForTheProposal, null, new { @class = "form-control", @maxlength = "15", @placeholder = "Enter RCA here" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="City">Created By<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.CreatedBy, null, new { @class = "form-control", @readonly = "readonly", @maxlength = "15", @placeholder = "Enter Created By here" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Created Date<font color="red">*</font></label>
+                    </div>
+                    <div class="form-group input-group-sm col-md-offset col-md-4 disabled">
+                        @Html.TextBoxFor(model => model.CreatedDate, new { @class = "form-control datepicker", @disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div style="text-align:center!important;" id="divServiceActionPanel" class="form-group col-md-offset col-md-10">
+                        <input type="submit" value="Update" id="btnLeadServiceSubmit" class="btn btn-primary" />
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

@@ -1,0 +1,231 @@
+﻿@model AbendLog.Models.ListAbendLog
+
+@{
+    ViewData["Title"] = "List";
+
+    Layout = "~/Views/Shared/_LayoutAbend.cshtml";
+
+}
+
+<br />
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //select2
+
+        $("#Incident").select2();
+
+        var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
+
+        var status;
+
+        for (var i = 0; i < url.length; i++) {
+
+            var urlparam = url[i].split('=');
+
+            if (urlparam[0] == "team") {
+
+                status = urlparam[1];
+
+            }
+
+        }
+
+
+
+        $("#Team option").each(function () {
+
+            if ($(this).val() == status) {
+
+                $(this).attr('selected', 'selected');
+                $("#Team").select2();
+            }
+
+        });
+
+
+
+        $("#divLoading").hide();
+
+        BindAbendLog();
+
+
+
+        $("#btnAbendLog").click(function () {
+
+            BindAbendLog();
+
+        });
+
+    });
+
+
+
+    function BindAbendLog() {
+
+        $("#abendtbl").dataTable().fnDestroy();
+        $("#abendtbl").DataTable({
+            "ajax": {
+                "url": "GetAbendLogData",
+                "type": "GET",
+                "datatype": "json",
+                "bDestroy": true,
+                "data": {
+                    incidentNumber: $("#SelectIncidentNumber").val(),
+                    jobName: $("#SelectJobName").val(),
+                    stepName: $("#SelectStepName").val(),
+                    status: $("#SelectStatus").val(),
+                    classification: $("#SelectClassification").val(),
+                    subClassification: $("#SelectSubClassification").val(),
+                    abendCode: $("#SelectAbendCode").val(),
+                    rca: $("#SelectRCA").val(),
+                    team: $("#Team").val(),
+                    startTime: $("#SelectAbendStartDate").val(),
+                    endTime: $("#SelectAbendEndDate").val()
+                    
+                }
+
+            },
+
+            "columns": [
+                        {
+
+                            "data": "IncidentNumber", "autowidth": true,
+
+                            "render": function (data, type, row, meta) {
+
+                                if (type === 'display') {
+                                    
+                                    data = '<a href="Edit?id=' + row.ID + '">' + data + '</a>';
+                                }
+                                return data;
+
+                            }
+
+                        },
+
+                        { "data": "JobName", "autowidth": true },
+
+                        { "data": "StepName", "autowidth": true },
+
+                        { "data": "Team", "autowidth": true },
+
+                        { "data": "AbendCode", "autowidth": true },
+                       
+
+                        { "data": "RCA", "autowidth": true }
+            ]
+        });
+    }
+
+</script>
+
+@using (Html.BeginForm("List", "AbendLog", FormMethod.Post, new { @id = "lstAbendLog" }))
+{
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">AMS Abend Log Filter</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="incident">Incident Number</label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.DropDownListFor(m => m.SelectIncidentNumber, Model.Incidents, new { @class = "form-control", @style = "width:280px;height:30px;", @maxlength = "30" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="SDate">Job Code</label>
+                    </div>
+                    <div class="form-group col-md-offset col-md-4">
+                        @Html.DropDownListFor(m => m.SelectJobName, Model.JobNames, new { @class = "form-control", @style = "width:280px;height:30px;", @maxlength = "30" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="MobileNumber">Abend Code</label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.SelectAbendCode, null, new { @class = "form-control", @style = "width:300px;", @maxlength = "30" })
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="Classfication">RCA</label>
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        @Html.TextBoxFor(m => m.SelectRCA, null, new { @class = "form-control", @style = "width:280px;height:30px;", @maxlength = "10000" })
+
+                    </div>                  
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="SDate">Step Name</label>
+                    </div>
+                    <div class="form-group  col-md-offset col-md-4">
+                        @Html.DropDownListFor(m => m.SelectStepName, Model.StepNames, new { @class = "form-control", @style = "width:118px;height:30px;", @maxlength = "30" })
+                        <label for="service">Team</label>
+                        <select class="form-control" id="Team" name="Team" style="width:118px">
+                            <option value="">All</option>
+                            <option value="PMS">PMS</option>
+                            <option value="Exceed">Exceed</option>
+                        </select>
+                    </div>
+                   
+                    <div class="form-group col-md-offset col-md-2">
+                        <label for="service">Abend Date</label>
+                    </div>
+                    <div class="form-group input-group-sm col-md-offset col-md-4">
+                        
+                        @Html.EditorFor(model => model.SelectAbendStartDate, new { @class = "form-control",@style= "max-width:130px!important;" })
+                        <b>TO</b>
+                        @Html.EditorFor(model => model.SelectAbendEndDate, new { @class = "form-control", @style = "max-width:130px!important;" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                        <input type="button" value="Filter" id="btnAbendLog" class="btn btn-primary" />
+                        <input type="submit" value="Clear" id="btnClear" class="btn btn-primary" />
+                    </div>
+                    <div class="form-group col-md-offset col-md-2">
+                    </div>
+                    <div class="form-group clockpicker col-md-offset col-md-4">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br />
+
+    <div class="row">
+
+        <div class="form-group clockpicker col-md-offset col-md-12">
+
+            <a href="/AbendLog/Create" class="btn btn-primary" asp-action="Create">Create New</a>
+            <a href="/AbendLog/ModelEmail" target="_blank" class="btn btn-primary" asp-action="ModelEmail">Model Email</a>
+            <a href="/AbendLog/ProductionEmail" target="_blank" class="btn btn-primary" asp-action="ProductionEmail">Production Email</a>
+            <a href="/AbendLog/ModelStatusEmail" target="_blank" class="btn btn-primary" asp-action="ModelStatusEmail">Model Status Email</a>
+            <a href="/AbendLog/ProductionStatusEmail" target="_blank" class="btn btn-primary" asp-action="ProductionStatusEmail">Production Status Email</a>
+        </div>
+
+    </div>
+
+    <table id="abendtbl" class="table table-striped table-bordered" style="width:100%">
+
+        <thead>
+            <tr>
+               <th>Incident Number</th>
+                <th>Job Code</th>
+                <th>Step Name</th>
+                <th>Abend Code</th>
+               <th>Classfication</th>
+                <th>RCA</th>
+            </tr>
+        </thead>
+    </table>
+}
+

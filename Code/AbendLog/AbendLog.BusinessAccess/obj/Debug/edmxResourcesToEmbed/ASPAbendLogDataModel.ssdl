@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ASPAbendLogDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AbendLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IncidentNumber" Type="varchar(max)" Nullable="false" />
+    <Property Name="Region" Type="varchar(max)" Nullable="false" />
+    <Property Name="JobName" Type="varchar(max)" Nullable="false" />
+    <Property Name="StepName" Type="varchar(max)" Nullable="false" />
+    <Property Name="ProgramName" Type="varchar(max)" Nullable="false" />
+    <Property Name="AbendCode" Type="varchar(max)" Nullable="false" />
+    <Property Name="AbendDescription" Type="varchar(max)" Nullable="false" />
+    <Property Name="AbendDate" Type="datetime" Nullable="false" />
+    <Property Name="AbendTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="RestartTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="OnCallAssociate" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TimeSpend" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RCA" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Classification" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SubClassification" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Solution" Type="varchar(max)" Nullable="false" />
+    <Property Name="ResolvedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ResolvedDate" Type="datetime" Nullable="false" />
+    <Property Name="CallFromEnsono" Type="varchar(max)" Nullable="false" />
+    <Property Name="LevelTimeForEscalation" Type="varchar(max)" Nullable="false" />
+    <Property Name="EscalatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SLABreach" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Createdby" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Modifiedby" Type="varchar" MaxLength="100" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="PermanentFix" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ASPAbendLogData.dbo.DocumentManagement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DocumentManagement">
+    <Key>
+      <PropertyRef Name="DocumentId" />
+      <PropertyRef Name="AbendId" />
+      <PropertyRef Name="DocumentName" />
+      <PropertyRef Name="DocumentPath" />
+      <PropertyRef Name="IsReUpload" />
+      <PropertyRef Name="UploadedBy" />
+      <PropertyRef Name="UploadedDate" />
+    </Key>
+    <Property Name="DocumentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AbendId" Type="int" Nullable="false" />
+    <Property Name="DocumentName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="DocumentPath" Type="varchar(max)" Nullable="false" />
+    <Property Name="IsReUpload" Type="bit" Nullable="false" />
+    <Property Name="UploadedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="UploadedDate" Type="datetime" Nullable="false" />
+    <Property Name="ReuploadedBy" Type="varchar" MaxLength="100" />
+    <Property Name="ReuploadedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PermanentFix">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IncidentNumber" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RCA" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TemporarilyResolution" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProposedPermanentFix" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ComponentFixed" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FixStatus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Resources" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Reviewer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Issues" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Attachments" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ApprovalForTheProposal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Reports">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Years" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Months" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="GeneratedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="GeneratedDate" Type="datetime" Nullable="false" />
+    <Property Name="TypeOfReport" Type="tinyint" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmailID" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LANID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <Function Name="GetAbendlogData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+    <Parameter Name="JobName" Type="varchar" Mode="In" />
+    <Parameter Name="StepName" Type="varchar" Mode="In" />
+    <Parameter Name="AbendCode" Type="varchar" Mode="In" />
+    <Parameter Name="Classification" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SubClassification" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Status" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="p_GetAbendlogData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Region" Type="varchar" Mode="In" />
+    <Parameter Name="JobName" Type="varchar" Mode="In" />
+    <Parameter Name="StepName" Type="varchar" Mode="In" />
+    <Parameter Name="ProgramName" Type="varchar" Mode="In" />
+    <Parameter Name="AbendCode" Type="varchar" Mode="In" />
+    <Parameter Name="AbendDescription" Type="varchar" Mode="In" />
+    <Parameter Name="AbendDate" Type="date" Mode="In" />
+    <Parameter Name="AbendTime" Type="time" Mode="In" />
+    <Parameter Name="RestartTime" Type="time" Mode="In" />
+    <Parameter Name="OnCallAssociate" Type="varchar" Mode="In" />
+    <Parameter Name="TimeSpend" Type="varchar" Mode="In" />
+    <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Classification" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Solution" Type="varchar" Mode="In" />
+    <Parameter Name="OpenedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ResolvedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ResolvedDate" Type="date" Mode="In" />
+    <Parameter Name="CallFromEnsono" Type="varchar" Mode="In" />
+    <Parameter Name="Escalation" Type="varchar" Mode="In" />
+    <Parameter Name="LevelTimeForEscalation" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedTo" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedBy" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedDate" Type="date" Mode="In" />
+    <Parameter Name="Status" Type="varchar" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SLABreach" Type="varchar" Mode="In" />
+    <Parameter Name="SLABreachComments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Createdby" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedDate" Type="date" Mode="In" />
+    <Parameter Name="Modifiedby" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+    <Parameter Name="PermanentFix" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="p_GetAbendlogDataByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Region" Type="varchar" Mode="In" />
+    <Parameter Name="JobName" Type="varchar" Mode="In" />
+    <Parameter Name="StepName" Type="varchar" Mode="In" />
+    <Parameter Name="ProgramName" Type="varchar" Mode="In" />
+    <Parameter Name="AbendCode" Type="varchar" Mode="In" />
+    <Parameter Name="AbendDescription" Type="varchar" Mode="In" />
+    <Parameter Name="AbendDate" Type="date" Mode="In" />
+    <Parameter Name="AbendTime" Type="time" Mode="In" />
+    <Parameter Name="RestartTime" Type="time" Mode="In" />
+    <Parameter Name="OnCallAssociate" Type="varchar" Mode="In" />
+    <Parameter Name="TimeSpend" Type="varchar" Mode="In" />
+    <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Classification" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SubClassification" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Solution" Type="varchar" Mode="In" />
+    <Parameter Name="OpenedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ResolvedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ResolvedDate" Type="date" Mode="In" />
+    <Parameter Name="CallFromEnsono" Type="varchar" Mode="In" />
+    <Parameter Name="Escalation" Type="varchar" Mode="In" />
+    <Parameter Name="LevelTimeForEscalation" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedTo" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedBy" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedDate" Type="date" Mode="In" />
+    <Parameter Name="Status" Type="varchar" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SLABreach" Type="varchar" Mode="In" />
+    <Parameter Name="SLABreachComments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Createdby" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedDate" Type="date" Mode="In" />
+    <Parameter Name="Modifiedby" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+    <Parameter Name="PermanentFix" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="p_GetInsertPermanentFixData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+    <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="TemporarilyResolution" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProposedPermanentFix" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ComponentFixed" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="FixStatus" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="date" Mode="In" />
+    <Parameter Name="EndDate" Type="date" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Resources" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Reviewer" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Issues" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Attachments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ApprovalForTheProposal" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedDate" Type="date" Mode="In" />
+    <Parameter Name="ModifiedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="p_GetPermanentFixData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="p_GetPermanentFixDataWithId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="p_GetReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="p_InsertAbendLogData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Region" Type="varchar" Mode="In" />
+    <Parameter Name="JobName" Type="varchar" Mode="In" />
+    <Parameter Name="StepName" Type="varchar" Mode="In" />
+    <Parameter Name="ProgramName" Type="varchar" Mode="In" />
+    <Parameter Name="AbendCode" Type="varchar" Mode="In" />
+    <Parameter Name="AbendDescription" Type="varchar" Mode="In" />
+    <Parameter Name="AbendDate" Type="date" Mode="In" />
+    <Parameter Name="AbendTime" Type="nvarchar" Mode="In" />
+    <Parameter Name="RestartTime" Type="nvarchar" Mode="In" />
+    <Parameter Name="OnCallAssociate" Type="varchar" Mode="In" />
+    <Parameter Name="TimeSpend" Type="varchar" Mode="In" />
+    <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Classification" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SubClassification" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Solution" Type="varchar" Mode="In" />
+    <Parameter Name="OpenedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ResolvedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ResolvedDate" Type="date" Mode="In" />
+    <Parameter Name="CallFromEnsono" Type="varchar" Mode="In" />
+    <Parameter Name="Escalation" Type="varchar" Mode="In" />
+    <Parameter Name="LevelTimeForEscalation" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedTo" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedBy" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedDate" Type="date" Mode="In" />
+    <Parameter Name="Status" Type="varchar" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SLABreach" Type="varchar" Mode="In" />
+    <Parameter Name="SLABreachComments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Createdby" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedDate" Type="date" Mode="In" />
+    <Parameter Name="Modifiedby" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+    <Parameter Name="PermanentFix" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="p_LoginCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LANID" Type="nvarchar" Mode="In" />
+    <Parameter Name="PASSWORD" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="p_UpdateAbendlogData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Region" Type="varchar" Mode="In" />
+    <Parameter Name="JobName" Type="varchar" Mode="In" />
+    <Parameter Name="StepName" Type="varchar" Mode="In" />
+    <Parameter Name="ProgramName" Type="varchar" Mode="In" />
+    <Parameter Name="AbendCode" Type="varchar" Mode="In" />
+    <Parameter Name="AbendDescription" Type="varchar" Mode="In" />
+    <Parameter Name="AbendDate" Type="date" Mode="In" />
+    <Parameter Name="AbendTime" Type="time" Mode="In" />
+    <Parameter Name="RestartTime" Type="time" Mode="In" />
+    <Parameter Name="OnCallAssociate" Type="varchar" Mode="In" />
+    <Parameter Name="TimeSpend" Type="varchar" Mode="In" />
+    <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Classification" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SubClassification" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Solution" Type="varchar" Mode="In" />
+    <Parameter Name="OpenedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ResolvedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ResolvedDate" Type="date" Mode="In" />
+    <Parameter Name="CallFromEnsono" Type="varchar" Mode="In" />
+    <Parameter Name="Escalation" Type="varchar" Mode="In" />
+    <Parameter Name="LevelTimeForEscalation" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedTo" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedBy" Type="varchar" Mode="In" />
+    <Parameter Name="EscalatedDate" Type="date" Mode="In" />
+    <Parameter Name="Status" Type="varchar" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SLABreach" Type="varchar" Mode="In" />
+    <Parameter Name="SLABreachComments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Createdby" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedDate" Type="date" Mode="In" />
+    <Parameter Name="Modifiedby" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+    <Parameter Name="PermanentFix" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="p_UpdatePermanentFixDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="IncidentNumber" Type="varchar" Mode="In" />
+    <Parameter Name="RCA" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="TemporarilyResolution" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProposedPermanentFix" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ComponentFixed" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="FixStatus" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="StartDate" Type="date" Mode="In" />
+    <Parameter Name="EndDate" Type="date" Mode="In" />
+    <Parameter Name="Comments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Resources" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Reviewer" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Issues" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Attachments" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ApprovalForTheProposal" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedDate" Type="date" Mode="In" />
+    <Parameter Name="ModifiedBy" Type="varchar" Mode="In" />
+    <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="ASPAbendLogDataModelStoreContainer">
+    <EntitySet Name="AbendLog" EntityType="Self.AbendLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PermanentFix" EntityType="Self.PermanentFix" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentManagement" EntityType="Self.DocumentManagement" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DocumentManagement].[DocumentId] AS [DocumentId], 
+    [DocumentManagement].[AbendId] AS [AbendId], 
+    [DocumentManagement].[DocumentName] AS [DocumentName], 
+    [DocumentManagement].[DocumentPath] AS [DocumentPath], 
+    [DocumentManagement].[IsReUpload] AS [IsReUpload], 
+    [DocumentManagement].[UploadedBy] AS [UploadedBy], 
+    [DocumentManagement].[UploadedDate] AS [UploadedDate], 
+    [DocumentManagement].[ReuploadedBy] AS [ReuploadedBy], 
+    [DocumentManagement].[ReuploadedDate] AS [ReuploadedDate]
+    FROM [dbo].[DocumentManagement] AS [DocumentManagement]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

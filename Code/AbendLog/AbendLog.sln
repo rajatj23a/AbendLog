@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbendLog", "AbendLog\AbendLog.csproj", "{FB580422-16CE-46B6-A4C5-0EC07BD9FB05}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7F4D4379-D86B-4092-BFAB-B31B0E0ADE26} = {7F4D4379-D86B-4092-BFAB-B31B0E0ADE26}
+		{53FF30E5-27E2-4D6E-9CAB-16A4E33CECD8} = {53FF30E5-27E2-4D6E-9CAB-16A4E33CECD8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbendLog.Tests", "AbendLog.Tests\AbendLog.Tests.csproj", "{02D6BEC2-19B1-48F2-A9E3-6BB043187444}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7F4D4379-D86B-4092-BFAB-B31B0E0ADE26} = {7F4D4379-D86B-4092-BFAB-B31B0E0ADE26}
+		{53FF30E5-27E2-4D6E-9CAB-16A4E33CECD8} = {53FF30E5-27E2-4D6E-9CAB-16A4E33CECD8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbendLog.DataAccess", "AbendLog.DataAccess\AbendLog.DataAccess.csproj", "{7F4D4379-D86B-4092-BFAB-B31B0E0ADE26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbendLog.BusinessAccess", "AbendLog.BusinessAccess\AbendLog.BusinessAccess.csproj", "{53FF30E5-27E2-4D6E-9CAB-16A4E33CECD8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB580422-16CE-46B6-A4C5-0EC07BD9FB05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB580422-16CE-46B6-A4C5-0EC07BD9FB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB580422-16CE-46B6-A4C5-0EC07BD9FB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB580422-16CE-46B6-A4C5-0EC07BD9FB05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D6BEC2-19B1-48F2-A9E3-6BB043187444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D6BEC2-19B1-48F2-A9E3-6BB043187444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D6BEC2-19B1-48F2-A9E3-6BB043187444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D6BEC2-19B1-48F2-A9E3-6BB043187444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F4D4379-D86B-4092-BFAB-B31B0E0ADE26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F4D4379-D86B-4092-BFAB-B31B0E0ADE26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F4D4379-D86B-4092-BFAB-B31B0E0ADE26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F4D4379-D86B-4092-BFAB-B31B0E0ADE26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53FF30E5-27E2-4D6E-9CAB-16A4E33CECD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53FF30E5-27E2-4D6E-9CAB-16A4E33CECD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53FF30E5-27E2-4D6E-9CAB-16A4E33CECD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53FF30E5-27E2-4D6E-9CAB-16A4E33CECD8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA318730-4130-4D71-9850-151FC962FD76}
+	EndGlobalSection
+EndGlobal
