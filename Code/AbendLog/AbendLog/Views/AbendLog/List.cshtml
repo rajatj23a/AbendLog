@@ -94,14 +94,13 @@
 
                             "data": "IncidentNumber", "autowidth": true,
 
-                            "render": function (data, type, row, meta) {
-
+                    "render": function (data, type, row, meta) {
+                                
                                 if (type === 'display') {
                                     
-                                    data = '<a href="Edit?id=' + row.ID + '">' + data + '</a>';
+                                    data = '<a href="Edit?id=' + row.ID + '">' + row.IncidentNumber + '</a>';
                                 }
                                 return data;
-
                             }
 
                         },

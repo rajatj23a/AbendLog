@@ -92,7 +92,7 @@ C:\Users\rajat\OneDrive\_Development\Workplace\AbendLog\Code\AbendLog\AbendLog\b
 C:\Users\rajat\OneDrive\_Development\Workplace\AbendLog\Code\AbendLog\AbendLog\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\rajat\OneDrive\_Development\Workplace\AbendLog\Code\AbendLog\AbendLog\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\rajat\OneDrive\_Development\Workplace\AbendLog\Code\AbendLog\AbendLog\obj\Debug\AbendLog.csprojAssemblyReference.cache
+C:\Users\rajat\OneDrive\_Development\Workplace\AbendLog\Code\AbendLog\AbendLog\obj\Debug\AbendLog.csproj.CoreCompileInputs.cache
 C:\Users\rajat\OneDrive\_Development\Workplace\AbendLog\Code\AbendLog\AbendLog\obj\Debug\AbendLog.csproj.CopyComplete
 C:\Users\rajat\OneDrive\_Development\Workplace\AbendLog\Code\AbendLog\AbendLog\obj\Debug\AbendLog.dll
 C:\Users\rajat\OneDrive\_Development\Workplace\AbendLog\Code\AbendLog\AbendLog\obj\Debug\AbendLog.pdb
-C:\Users\rajat\OneDrive\_Development\Workplace\AbendLog\Code\AbendLog\AbendLog\obj\Debug\AbendLog.csproj.CoreCompileInputs.cache

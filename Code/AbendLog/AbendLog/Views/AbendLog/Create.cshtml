@@ -1,11 +1,8 @@
 ﻿@model AbendLog.BusinessAccess.Model.AbendLogData
-
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutAbend.cshtml";
 }
-
-
 <script src="~/Scripts/jquery-1.11.0.min.js"></script>
 
 <script type="text/javascript">
@@ -44,7 +41,7 @@
             if ($("#RCA").val().trim() == '') {
                 errorMsg += "Please enter the RCA\n"
             }
-            debugger
+            
             if ($("#Classification").val().trim() == '') {
                 errorMsg += "Please enter the Classification\n"
             }
@@ -690,6 +687,5 @@
             </div>
         </div>
     </div>
-
 }
 
